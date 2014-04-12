@@ -1,0 +1,19 @@
+name: Omneity3
+version: 0.1
+description: All-comprehensive catch-all plugin for junction.at servers. Based off of original Omneity Python Plugin.
+author: zifnab06
+website: http://github.com/junctionat/Omneity3
+
+main: at.junction.omneity3.Omneity3
+database: false
+
+commands:
+  spawn:
+    description: Teleport to spawn
+    permission: omneity.spawn
+    usage: /spawn
+
+permissions:
+  omneity.spawn:
+    description: Usage of /spawn command
+    default: op
