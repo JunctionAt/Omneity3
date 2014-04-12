@@ -1,0 +1,39 @@
+spawn:
+  - location: "world,0,21,0,180.0,2.0"
+  - bedSpawn: true
+  - firstJoinMessageEnabled: true
+  - firstJoinMessage: "%sWelcome %s to the server!"
+recipes:
+  - shaped:
+    - DIAMOND_BARDING:
+      amount: 1
+      shape:
+        - XXD
+        - DSD
+        - DDD
+      items:
+        - D: DIAMOND
+        - S: SADDLE
+        - X: AIR
+    - GOLD_BARDING:
+      amount: 1
+      data: -1
+      shape:
+        - XXG
+        - GSG
+        - GGG
+      items:
+        - G: GOLD_BAR
+        - S: SADDLE
+        - X: AIR
+    - IRON_BARDING:
+      amount: 1
+      data: -1
+      shape:
+        - XXI
+        - ISI
+        - III
+      items:
+        - I: IRON_BAR
+        - S: SADDLE
+        - X: AIR
