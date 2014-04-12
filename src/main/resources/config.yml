@@ -1,10 +1,10 @@
 spawn:
-  - location: "world,0,21,0,180.0,2.0"
-  - bedSpawn: true
-  - firstJoinMessageEnabled: true
-  - firstJoinMessage: "%sWelcome %s to the server!"
+  location: "world,0,21,0,180.0,2.0"
+  bedSpawn: true
+  firstJoinMessageEnabled: true
+  firstJoinMessage: "%sWelcome %s to the server!"
 recipes:
-  - shaped:
+  shaped:
     - DIAMOND_BARDING:
       amount: 1
       shape:
