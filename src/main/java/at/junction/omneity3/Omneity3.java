@@ -1,7 +1,9 @@
 package at.junction.omneity3;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.inventory.FurnaceRecipe;
@@ -35,6 +37,14 @@ public class Omneity3 extends JavaPlugin{
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String name, String[] args) {
+        if (command.getName().equals("spawn")){
+            if (sender instanceof Player){
+                ((Player)sender).teleport(config.spawn.LOCATION);
+                sender.sendMessage(ChatColor.RED + "Wooosh!");
+            } else {
+                sender.sendMessage(ChatColor.RED + "Only usable by players, sorry!");
+            }
+        }
         return true;
     }
 }
