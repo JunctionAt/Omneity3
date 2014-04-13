@@ -45,6 +45,9 @@ public class Configuration {
             ConfigurationSection config = plugin.getConfig().getConfigurationSection("recipes");
             if (config.isSet("shaped")) {
                 System.out.println("Shaped recipes object found");
+                for (String x : config.getKeys(false)){
+                    System.out.println(x);
+                }
                 if (config.isConfigurationSection("shaped")) {
                     System.out.println("Shaped recipes object is a config section");
                     ConfigurationSection shaped = config.getConfigurationSection("recipes.shaped");
