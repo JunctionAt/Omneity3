@@ -39,34 +39,14 @@ public class Configuration {
     }
 
     public class Recipes {
-        public ArrayList<ShapedRecipe> SHAPED_RECIPES;
-        public ArrayList<ShapelessRecipe> SHAPLESS_RECIPES;
-        public ArrayList<FurnaceRecipe> FURNACE_RECIPES;
-
         public void load() {
-            ConfigurationSection config = plugin.getConfig().getConfigurationSection("recipes");
-            SHAPED_RECIPES = new ArrayList<ShapedRecipe>();
-            if (config.isSet("shaped")) {
-                System.out.println("Shaped recipes listmap found");
-                List<Map<?, ?>> recipeList = config.getMapList("shaped");
-                for (Map<?, ?> map : recipeList) {
-                    String item = (String) map.get((Object) "item");
-                    //Material item = Material.valueOf((String) map.get((Object) "item"));
-                    Integer amount = (Integer) map.get((Object) "amount");
-                    List<String> shape = (List<String>) map.get((Object) "shape");
-                    Map<String, String> items = (Map<String, String>) map.get((Object) "items");
-
-                    System.out.println(item);
-                    System.out.println(amount);
-                    ShapedRecipe recipe = new ShapedRecipe(new ItemStack(Material.valueOf(item), amount));
-                    recipe.shape((String[]) shape.toArray());
-
-                    for (String c : items.keySet()) {
-                        recipe.setIngredient(c.toCharArray()[0], Material.valueOf(items.get(c)));
-                    }
-                    SHAPED_RECIPES.add(recipe);
-                }
-            }
+            //Realistically, this should be reading from YAML
+            //I think YAML is retarded
+            //It needs to go die in a fire
+            //Bukkit's YAML lib cannot deal with paths through yaml that contain an array
+            //As that is something this requires to work
+            //I said fuck it, and wrote this comment instead.
+            //Then hard-coded recipes in Omneity3
         }
     }
 

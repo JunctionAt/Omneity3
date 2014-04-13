@@ -1,14 +1,12 @@
 package at.junction.omneity3;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.*;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.inventory.FurnaceRecipe;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.ShapelessRecipe;
 
 import java.io.File;
 
@@ -25,12 +23,6 @@ public class Omneity3 extends JavaPlugin{
         config = new Configuration(this);
         config.load();
         getServer().getPluginManager().registerEvents(new Omneity3Listener(this), this);
-        //Load New Recipes
-
-        for (Recipe r : config.recipes.SHAPED_RECIPES){
-            getServer().addRecipe(r);
-        }
-
     }
 
 
@@ -50,5 +42,33 @@ public class Omneity3 extends JavaPlugin{
             }
         }
         return true;
+    }
+
+    public void loadRecipes(){
+        String[] bardingLayout = {"XXA", "ASA", "AAA"};
+
+        //diamondBarding
+        ShapedRecipe diamondBarding = new ShapedRecipe(new ItemStack(Material.DIAMOND_BARDING));
+        diamondBarding.shape(bardingLayout);
+        diamondBarding.setIngredient('X', Material.AIR);
+        diamondBarding.setIngredient('A', Material.DIAMOND);
+        diamondBarding.setIngredient('S', Material.SADDLE);
+        getServer().addRecipe(diamondBarding);
+
+        //goldBarding
+        ShapedRecipe goldBarding = new ShapedRecipe(new ItemStack(Material.GOLD_BARDING));
+        goldBarding.shape(bardingLayout);
+        goldBarding.setIngredient('X', Material.AIR);
+        goldBarding.setIngredient('A', Material.GOLD_INGOT);
+        goldBarding.setIngredient('S', Material.SADDLE);
+        getServer().addRecipe(goldBarding);
+
+        //ironBarding
+        ShapedRecipe ironBarding = new ShapedRecipe(new ItemStack(Material.IRON_BARDING));
+        ironBarding.shape(bardingLayout);
+        ironBarding.setIngredient('X', Material.AIR);
+        ironBarding.setIngredient('A', Material.IRON_INGOT);
+        ironBarding.setIngredient('S', Material.SADDLE);
+        getServer().addRecipe(ironBarding);
     }
 }
