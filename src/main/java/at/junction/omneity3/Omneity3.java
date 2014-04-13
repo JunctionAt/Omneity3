@@ -27,6 +27,10 @@ public class Omneity3 extends JavaPlugin{
         getServer().getPluginManager().registerEvents(new Omneity3Listener(this), this);
         //Load New Recipes
 
+        for (Recipe r : config.recipes.SHAPED_RECIPES){
+            getServer().addRecipe(r);
+        }
+
     }
 
 

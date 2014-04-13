@@ -5,33 +5,33 @@ spawn:
   firstJoinMessage: "%sWelcome %s to the server!"
 recipes:
   shaped:
-    - DIAMOND_BARDING:
-        amount: 1
-        shape:
-          - XXD
-          - DSD
-          - DDD
-        items:
-          - D: DIAMOND
-          - S: SADDLE
-          - X: AIR
-    - GOLD_BARDING:
-        amount: 1
-        shape:
-          - XXG
-          - GSG
-          - GGG
-        items:
-          - G: GOLD_BAR
-          - S: SADDLE
-          - X: AIR
-    - IRON_BARDING:
-        amount: 1
-        shape:
-          - XXI
-          - ISI
-          - III
-        items:
-          - I: IRON_BAR
-          - S: SADDLE
-          - X: AIR
+  - item: DIAMOND_BARDING
+    amount: 1
+    shape:
+    - XXD
+    - DSD
+    - DDD
+    items:
+    - D: DIAMOND
+    - S: SADDLE
+    - X: AIR
+  - item: GOLD_BARDING
+    amount: 1
+    shape:
+    - XXG
+    - GSG
+    - GGG
+    items:
+    - G: GOLD_BAR
+    - S: SADDLE
+    - X: AIR
+  - item: IRON_BARDING
+    amount: 1
+    shape:
+    - XXI
+    - ISI
+    - III
+    items:
+    - I: IRON_BAR
+    - S: SADDLE
+    - X: AIR

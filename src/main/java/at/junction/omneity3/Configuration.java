@@ -6,6 +6,8 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
 public class Configuration {
@@ -43,31 +45,28 @@ public class Configuration {
 
         public void load() {
             ConfigurationSection config = plugin.getConfig().getConfigurationSection("recipes");
+            SHAPED_RECIPES = new ArrayList<ShapedRecipe>();
             if (config.isSet("shaped")) {
-                System.out.println("Shaped recipes object found");
-                for (String x : config.getKeys(false)){
-                    System.out.println(x);
-                }
-                if (config.isConfigurationSection("shaped")) {
-                    System.out.println("Shaped recipes object is a config section");
-                    ConfigurationSection shaped = config.getConfigurationSection("recipes.shaped");
-                    System.out.println(shaped);
-                    for (String shapedItem : shaped.getKeys(false)) {
-                        System.out.println(shapedItem);
-                        ShapedRecipe recipe = new ShapedRecipe(new ItemStack(Material.getMaterial(shapedItem), shaped.getInt(shapedItem + ".amount")));
-                        recipe.shape((String[]) shaped.getStringList(shapedItem + ".shape").toArray());
-                        for (String item : shaped.getConfigurationSection(shapedItem + ".items").getKeys(false)) {
-                            for (char c : item.toCharArray()) {
-                                recipe.setIngredient(c, Material.getMaterial(shaped.getString(shapedItem + ".items." + c)));
-                            }
-                        }
+                System.out.println("Shaped recipes listmap found");
+                List<Map<?, ?>> recipeList = config.getMapList("shaped");
+                for (Map<?, ?> map : recipeList) {
+                    String item = (String) map.get((Object) "item");
+                    //Material item = Material.valueOf((String) map.get((Object) "item"));
+                    int amount = (int) map.get((Object) "amount");
+                    List<String> shape = (List<String>) map.get((Object) "shape");
+                    Map<String, String> items = (Map<String, String>) map.get((Object) "items");
+
+
+                    ShapedRecipe recipe = new ShapedRecipe(new ItemStack(Material.valueOf(item), amount));
+                    recipe.shape((String[]) shape.toArray());
+
+                    for (String c : items.keySet()) {
+                        recipe.setIngredient(c.toCharArray()[0], Material.valueOf(items.get(c)));
                     }
+                    SHAPED_RECIPES.add(recipe);
                 }
             }
-
         }
-
-
     }
 
 
