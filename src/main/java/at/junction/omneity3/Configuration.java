@@ -45,7 +45,9 @@ public class Configuration {
             ConfigurationSection config = plugin.getConfig().getConfigurationSection("recipes");
 
             ConfigurationSection shaped = config.getConfigurationSection("shaped");
+            System.out.println(shaped);
             for (String shapedItem : shaped.getKeys(false)){
+                System.out.println(shapedItem);
                 ShapedRecipe recipe = new ShapedRecipe(new ItemStack(Material.getMaterial(shapedItem), shaped.getInt(shapedItem + ".amount")));
                 recipe.shape((String[])shaped.getStringList(shapedItem + ".shape").toArray());
                 for (String item: shaped.getConfigurationSection(shapedItem+".items").getKeys(false)){
