@@ -56,7 +56,8 @@ public class Configuration {
                     List<String> shape = (List<String>) map.get((Object) "shape");
                     Map<String, String> items = (Map<String, String>) map.get((Object) "items");
 
-
+                    System.out.println(item);
+                    System.out.println(amount);
                     ShapedRecipe recipe = new ShapedRecipe(new ItemStack(Material.valueOf(item), amount));
                     recipe.shape((String[]) shape.toArray());
 
