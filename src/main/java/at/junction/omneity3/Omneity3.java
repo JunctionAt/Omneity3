@@ -23,6 +23,7 @@ public class Omneity3 extends JavaPlugin{
         config = new Configuration(this);
         config.load();
         getServer().getPluginManager().registerEvents(new Omneity3Listener(this), this);
+        loadRecipes();
     }
 
 
