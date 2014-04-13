@@ -45,12 +45,11 @@ public class Omneity3 extends JavaPlugin{
     }
 
     public void loadRecipes(){
-        String[] bardingLayout = {"XXA", "ASA", "AAA"};
+        String[] bardingLayout = {"  A", "ASA", "AAA"};
 
         //diamondBarding
         ShapedRecipe diamondBarding = new ShapedRecipe(new ItemStack(Material.DIAMOND_BARDING));
         diamondBarding.shape(bardingLayout);
-        diamondBarding.setIngredient('X', Material.AIR);
         diamondBarding.setIngredient('A', Material.DIAMOND);
         diamondBarding.setIngredient('S', Material.SADDLE);
         getServer().addRecipe(diamondBarding);
@@ -58,7 +57,6 @@ public class Omneity3 extends JavaPlugin{
         //goldBarding
         ShapedRecipe goldBarding = new ShapedRecipe(new ItemStack(Material.GOLD_BARDING));
         goldBarding.shape(bardingLayout);
-        goldBarding.setIngredient('X', Material.AIR);
         goldBarding.setIngredient('A', Material.GOLD_INGOT);
         goldBarding.setIngredient('S', Material.SADDLE);
         getServer().addRecipe(goldBarding);
@@ -66,7 +64,6 @@ public class Omneity3 extends JavaPlugin{
         //ironBarding
         ShapedRecipe ironBarding = new ShapedRecipe(new ItemStack(Material.IRON_BARDING));
         ironBarding.shape(bardingLayout);
-        ironBarding.setIngredient('X', Material.AIR);
         ironBarding.setIngredient('A', Material.IRON_INGOT);
         ironBarding.setIngredient('S', Material.SADDLE);
         getServer().addRecipe(ironBarding);
