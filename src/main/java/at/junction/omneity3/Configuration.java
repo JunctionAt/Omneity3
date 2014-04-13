@@ -52,7 +52,7 @@ public class Configuration {
                 for (Map<?, ?> map : recipeList) {
                     String item = (String) map.get((Object) "item");
                     //Material item = Material.valueOf((String) map.get((Object) "item"));
-                    int amount = (int) map.get((Object) "amount");
+                    Integer amount = (Integer) map.get((Object) "amount");
                     List<String> shape = (List<String>) map.get((Object) "shape");
                     Map<String, String> items = (Map<String, String>) map.get((Object) "items");
 
