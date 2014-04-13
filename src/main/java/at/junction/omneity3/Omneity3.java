@@ -41,6 +41,8 @@ public class Omneity3 extends JavaPlugin{
             } else {
                 sender.sendMessage(ChatColor.RED + "Only usable by players, sorry!");
             }
+        } else if (command.getName().equalsIgnoreCase("o3-reload")){
+            config.reload();
         }
         return true;
     }

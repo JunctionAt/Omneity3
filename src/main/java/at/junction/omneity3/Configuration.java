@@ -66,6 +66,6 @@ public class Configuration {
     }
 
     public void reload() {
-
+        spawn.load();
     }
 }

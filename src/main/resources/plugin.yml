@@ -12,6 +12,10 @@ commands:
     description: Teleport to spawn
     permission: omneity.spawn
     usage: /spawn
+  o3-reload:
+    description: Reload config
+    permission: omneity.tech
+    usage: /o3-reload
 
 permissions:
   omneity.spawn:
