@@ -43,16 +43,21 @@ public class Configuration {
 
         public void load() {
             ConfigurationSection config = plugin.getConfig().getConfigurationSection("recipes");
-
-            ConfigurationSection shaped = config.getConfigurationSection("shaped");
-            System.out.println(shaped);
-            for (String shapedItem : shaped.getKeys(false)){
-                System.out.println(shapedItem);
-                ShapedRecipe recipe = new ShapedRecipe(new ItemStack(Material.getMaterial(shapedItem), shaped.getInt(shapedItem + ".amount")));
-                recipe.shape((String[])shaped.getStringList(shapedItem + ".shape").toArray());
-                for (String item: shaped.getConfigurationSection(shapedItem+".items").getKeys(false)){
-                    for (char c : item.toCharArray()){
-                        recipe.setIngredient(c, Material.getMaterial(shaped.getString(shapedItem + ".items." + c)));
+            if (config.isSet("shaped")) {
+                System.out.println("Shaped recipes object found");
+                if (config.isConfigurationSection("shaped")) {
+                    System.out.println("Shaped recipes object is a config section");
+                    ConfigurationSection shaped = config.getConfigurationSection("recipes.shaped");
+                    System.out.println(shaped);
+                    for (String shapedItem : shaped.getKeys(false)) {
+                        System.out.println(shapedItem);
+                        ShapedRecipe recipe = new ShapedRecipe(new ItemStack(Material.getMaterial(shapedItem), shaped.getInt(shapedItem + ".amount")));
+                        recipe.shape((String[]) shaped.getStringList(shapedItem + ".shape").toArray());
+                        for (String item : shaped.getConfigurationSection(shapedItem + ".items").getKeys(false)) {
+                            for (char c : item.toCharArray()) {
+                                recipe.setIngredient(c, Material.getMaterial(shaped.getString(shapedItem + ".items." + c)));
+                            }
+                        }
                     }
                 }
             }
