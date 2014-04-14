@@ -6,10 +6,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerFishEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
-import org.bukkit.event.player.PlayerPortalEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Random;
@@ -20,7 +17,7 @@ public class Omneity3Listener implements Listener {
         this.plugin = plugin;
     }
     @EventHandler
-    void onPlayerLoginEvent(PlayerLoginEvent event){
+    void onPlayerJoinEvent(PlayerJoinEvent event){
         Player player = event.getPlayer();
         if (!player.hasPlayedBefore()){
             player.teleport(plugin.config.spawn.LOCATION);
