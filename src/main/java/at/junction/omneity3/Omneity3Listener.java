@@ -3,6 +3,7 @@ package at.junction.omneity3;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -11,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityCreatePortalEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.event.world.PortalCreateEvent;
@@ -97,47 +99,49 @@ public class Omneity3Listener implements Listener {
     }
 
     @EventHandler
-    public void onPortalCreateEvent(PortalCreateEvent event) {
-        if (event.getReason() == PortalCreateEvent.CreateReason.FIRE) {
-
+    public void onPortalCreateEvent(EntityCreatePortalEvent event) {
+        if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
             if (!plugin.config.portals.PORTALS_ENABLED || plugin.config.portals.MODREQ_PORTALS) {
+                if (player.hasPermission("omneity.portal")){
+                    return;
+                }
+
                 int lowest = 500;
 
-                for (Block b : event.getBlocks()) {
+                for (BlockState b : event.getBlocks()) {
                     if (b.getLocation().getBlockY() < lowest) {
                         lowest = b.getLocation().getBlockY();
                     }
                 }
-                for (Block b : event.getBlocks()) {
-                    if (b.getLocation().getBlockY() == lowest) {
-                        Block above = b.getRelative(BlockFace.UP);
-                        above.setType(Material.SIGN_POST);
-                        Sign sign = (Sign) above.getState();
-                        above.getRelative(BlockFace.UP).setType(Material.AIR);
+                for (BlockState blockState : event.getBlocks()) {
+                    if (blockState.getLocation().getBlockY() == lowest + 1) {
+                        blockState.setType(Material.SIGN_POST);
+                        Sign sign = (Sign) blockState;
+                        blockState.getBlock().getRelative(BlockFace.UP).setType(Material.AIR);
                         if (!plugin.config.portals.PORTALS_ENABLED) {
                             sign.setLine(0, "Portals are");
                             sign.setLine(1, "disabled on");
                             sign.setLine(2, "this server.");
 
                         } else if (plugin.config.portals.MODREQ_PORTALS) {
-                            sign.setLine(0, "Please make a");
-                            sign.setLine(1, "modreq to light");
-                            sign.setLine(2, "this portal.");
-                            sign.setLine(3, "Thanks!");
 
+                            sign.setLine(0, "Please wait");
+                            sign.setLine(1, "for a moderator");
+                            sign.setLine(2, "to light this");
+                            sign.setLine(3, "portal. Thanks");
+
+                            plugin.getServer().dispatchCommand(player, plugin.config.portals.MODREQ_COMMAND);
                         }
 
                         sign.update();
                         event.setCancelled(true);
-
-                        return;
                     }
                 }
             }
-        } else if (event.getReason() == PortalCreateEvent.CreateReason.OBC_DESTINATION) {
-            if (plugin.config.portals.DISABLE_DESTINATION_BUILD) {
-                event.setCancelled(true);
-            }
+        } else {
+            //Entity isn't a player - don't allow portal
+            event.setCancelled(true);
         }
     }
 }

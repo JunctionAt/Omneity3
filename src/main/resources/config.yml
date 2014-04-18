@@ -7,3 +7,4 @@ portals:
   enabled: true
   require-modreq: true
   disable-destination-build: true
+  modreq-command: "modreq Please light this portal"

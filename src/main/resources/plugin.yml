@@ -29,4 +29,5 @@ permissions:
     description: Usage of /world command
     default: op
   omneity.portal:
-    description:
+    description: Allows creation of portals, reguardless of portal mode.
+    default: op
