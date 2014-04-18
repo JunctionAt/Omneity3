@@ -119,7 +119,6 @@ public class Omneity3Listener implements Listener {
                     }
                 }
                 for (Block b : event.getBlocks()) {
-                    b.setType(Material.BEDROCK);
                     if (b.getLocation().getBlockY() == lowest) {
                         Block above = b.getRelative(BlockFace.UP);
                         above.setType(Material.SIGN_POST);
@@ -129,7 +128,6 @@ public class Omneity3Listener implements Listener {
                         sign.setLine(1, "modreq to light");
                         sign.setLine(2, "this portal.");
                         sign.setLine(3, "Thanks!");
-                        b.getLocation().add(0, 1, 0).getBlock().setType(Material.AIR);
                     }
                 }
             }
