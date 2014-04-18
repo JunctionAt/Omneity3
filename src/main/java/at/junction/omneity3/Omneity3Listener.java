@@ -2,6 +2,7 @@ package at.junction.omneity3;
 
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -119,9 +120,11 @@ public class Omneity3Listener implements Listener {
                 }
                 for (Block b : event.getBlocks()) {
                     b.setType(Material.BEDROCK);
-                    if (b.getLocation().getBlockY() == lowest + 1) {
-                        b.setType(Material.SIGN);
-                        Sign sign = (Sign) b.getState();
+                    if (b.getLocation().getBlockY() == lowest) {
+                        Block above = b.getRelative(BlockFace.UP);
+                        above.setType(Material.SIGN_POST);
+                        Sign sign = (Sign) above.getState();
+
                         sign.setLine(0, "Please make a");
                         sign.setLine(1, "modreq to light");
                         sign.setLine(2, "this portal.");
