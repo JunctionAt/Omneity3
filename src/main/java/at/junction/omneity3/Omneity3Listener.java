@@ -98,24 +98,14 @@ public class Omneity3Listener implements Listener {
 
     @EventHandler
     public void onPortalCreateEvent(PortalCreateEvent event) {
-        if (!plugin.config.portals.PORTALS_ENABLED) {
-            event.setCancelled(true);
-            for (Block b : event.getBlocks()) {
-                b.setType(Material.AIR);
-                b.setType(Material.GRAVEL);
-            }
-            return;
-        }
-        if (plugin.config.portals.MODREQ_PORTALS) {
-            if (event.getReason() == PortalCreateEvent.CreateReason.FIRE) {
+        if (event.getReason() == PortalCreateEvent.CreateReason.FIRE) {
+
+            if (!plugin.config.portals.PORTALS_ENABLED || plugin.config.portals.MODREQ_PORTALS) {
                 int lowest = 500;
-                int highest = -1;
+
                 for (Block b : event.getBlocks()) {
                     if (b.getLocation().getBlockY() < lowest) {
                         lowest = b.getLocation().getBlockY();
-                    }
-                    if (b.getLocation().getBlockY() > highest){
-                        highest = b.getLocation().getBlockY();
                     }
                 }
                 for (Block b : event.getBlocks()) {
@@ -123,17 +113,32 @@ public class Omneity3Listener implements Listener {
                         Block above = b.getRelative(BlockFace.UP);
                         above.setType(Material.SIGN_POST);
                         Sign sign = (Sign) above.getState();
-
-                        sign.setLine(0, "Please make a");
-                        sign.setLine(1, "modreq to light");
-                        sign.setLine(2, "this portal.");
-                        sign.setLine(3, "Thanks!");
-                        sign.update();
-
                         above.getRelative(BlockFace.UP).setType(Material.AIR);
+                        if (!plugin.config.portals.PORTALS_ENABLED) {
+                            sign.setLine(0, "Portals are");
+                            sign.setLine(1, "disabled on");
+                            sign.setLine(2, "this server.");
+
+                        } else if (plugin.config.portals.MODREQ_PORTALS) {
+                            sign.setLine(0, "Please make a");
+                            sign.setLine(1, "modreq to light");
+                            sign.setLine(2, "this portal.");
+                            sign.setLine(3, "Thanks!");
+
+                        }
+
+                        sign.update();
+                        event.setCancelled(true);
+
+                        return;
                     }
                 }
+            }
+        } else if (event.getReason() == PortalCreateEvent.CreateReason.OBC_DESTINATION) {
+            if (plugin.config.portals.DISABLE_DESTINATION_BUILD) {
+                event.setCancelled(true);
             }
         }
     }
 }
+

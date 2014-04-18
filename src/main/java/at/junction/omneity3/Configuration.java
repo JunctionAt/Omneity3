@@ -53,10 +53,12 @@ public class Configuration {
     public class Portals {
         boolean PORTALS_ENABLED;
         boolean MODREQ_PORTALS;
+        boolean DISABLE_DESTINATION_BUILD;
         public void load() {
             ConfigurationSection config = plugin.getConfig().getConfigurationSection("portals");
             PORTALS_ENABLED = config.getBoolean("enabled");
             MODREQ_PORTALS = config.getBoolean("require-modreq");
+            DISABLE_DESTINATION_BUILD = config.getBoolean("disable-destination-build");
         }
     }
 
