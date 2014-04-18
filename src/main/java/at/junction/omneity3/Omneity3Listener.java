@@ -100,6 +100,17 @@ public class Omneity3Listener implements Listener {
     public void onPortalCreateEvent(PortalCreateEvent event) {
         if (event.getReason() == PortalCreateEvent.CreateReason.FIRE) {
 
+            //Check to see if a moderator lit the portal
+            for (Player p : plugin.getServer().getOnlinePlayers()) {
+                if (p.hasPermission("omneity.portal")) {
+                    double distance = p.getLocation().distanceSquared(event.getBlocks().get(0).getLocation());
+                    if (distance < 10) {
+                        p.sendMessage(String.format("%s%s %s", ChatColor.GREEN, "Portal lit at " + event.getBlocks().get(0).getLocation().toString()));
+                        return;
+                    }
+                }
+            }
+
             if (!plugin.config.portals.PORTALS_ENABLED || plugin.config.portals.MODREQ_PORTALS) {
                 int lowest = 500;
 
