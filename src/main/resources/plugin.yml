@@ -16,8 +16,15 @@ commands:
     description: Reload config
     permission: omneity.tech
     usage: /o3-reload
+  world:
+    description: World teleportation
+    permission: omneity.world
+    usage: /world <name> [<x> <y> <z>]. Valid names are 'world', 'world_nether' and 'world_the_end'.
 
 permissions:
   omneity.spawn:
     description: Usage of /spawn command
+    default: op
+  omneity.world:
+    description: Usage of /world command
     default: op
