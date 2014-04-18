@@ -1,9 +1,8 @@
 package at.junction.omneity3;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Chunk;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
+import org.bukkit.block.Block;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
@@ -13,6 +12,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.*;
 import org.bukkit.event.world.ChunkUnloadEvent;
+import org.bukkit.event.world.PortalCreateEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Random;
@@ -64,6 +64,7 @@ public class Omneity3Listener implements Listener {
             }
         }
     }
+
     //When a chunk unloads, remove its monsters, excluding Withers
     //EnderDragon is NOT a monster, it is a ComplexLivingEntity (LEAVE ENDER ALONE)
     //Hoping this cuts down on lag?
@@ -76,10 +77,10 @@ public class Omneity3Listener implements Listener {
 
                 Boolean remove = true;
 
-                if (monster.getCustomName() != null){
+                if (monster.getCustomName() != null) {
                     remove = false;
                 }
-                if ( monster.getType() == EntityType.WITHER) {
+                if (monster.getType() == EntityType.WITHER) {
                     remove = false;
                 }
                 for (ItemStack item : monster.getEquipment().getArmorContents()) {
@@ -90,6 +91,44 @@ public class Omneity3Listener implements Listener {
                 }
                 if (remove)
                     monster.remove();
+            }
+        }
+    }
+
+    @EventHandler
+    public void onPortalCreateEvent(PortalCreateEvent event) {
+        if (!plugin.config.portals.PORTALS_ENABLED) {
+            event.setCancelled(true);
+            for (Block b : event.getBlocks()) {
+                b.setType(Material.AIR);
+                b.setType(Material.GRAVEL);
+            }
+            return;
+        }
+        if (plugin.config.portals.MODREQ_PORTALS) {
+            if (event.getReason() == PortalCreateEvent.CreateReason.FIRE) {
+                int lowest = 500;
+                int highest = -1;
+                for (Block b : event.getBlocks()) {
+                    if (b.getLocation().getBlockY() < lowest) {
+                        lowest = b.getLocation().getBlockY();
+                    }
+                    if (b.getLocation().getBlockY() > highest){
+                        highest = b.getLocation().getBlockY();
+                    }
+                }
+                for (Block b : event.getBlocks()) {
+                    b.setType(Material.BEDROCK);
+                    if (b.getLocation().getBlockY() == lowest + 1) {
+                        b.setType(Material.SIGN);
+                        Sign sign = (Sign) b;
+                        sign.setLine(0, "Please make a");
+                        sign.setLine(1, "modreq to light");
+                        sign.setLine(2, "this portal.");
+                        sign.setLine(3, "Thanks!");
+                        b.getLocation().add(0, 1, 0).getBlock().setType(Material.AIR);
+                    }
+                }
             }
         }
     }

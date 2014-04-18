@@ -28,3 +28,5 @@ permissions:
   omneity.world:
     description: Usage of /world command
     default: op
+  omneity.portal:
+    description:

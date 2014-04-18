@@ -3,3 +3,6 @@ spawn:
   bedSpawn: true
   firstJoinMessageEnabled: true
   firstJoinMessage: "%sWelcome %s to the server!"
+portals:
+  enabled: true
+  require-modreq: true

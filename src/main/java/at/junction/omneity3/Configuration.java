@@ -50,22 +50,36 @@ public class Configuration {
         }
     }
 
+    public class Portals {
+        boolean PORTALS_ENABLED;
+        boolean MODREQ_PORTALS;
+        public void load() {
+            ConfigurationSection config = plugin.getConfig().getConfigurationSection("portals");
+            PORTALS_ENABLED = config.getBoolean("enabled");
+            MODREQ_PORTALS = config.getBoolean("require-modreq");
+        }
+    }
+
 
     Spawn spawn;
     Recipes recipes;
+    Portals portals;
 
     public Configuration(Omneity3 plugin) {
         this.plugin = plugin;
         spawn = new Spawn();
         recipes = new Recipes();
+        portals = new Portals();
     }
 
     public void load() {
         spawn.load();
         recipes.load();
+        portals.load();
     }
 
     public void reload() {
         spawn.load();
+        portals.load();
     }
 }
