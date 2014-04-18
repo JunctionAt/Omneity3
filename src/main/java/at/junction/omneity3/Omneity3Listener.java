@@ -105,7 +105,7 @@ public class Omneity3Listener implements Listener {
                 if (p.hasPermission("omneity.portal")) {
                     double distance = p.getLocation().distanceSquared(event.getBlocks().get(0).getLocation());
                     if (distance < 10) {
-                        p.sendMessage(String.format("%s%s %s", ChatColor.GREEN, "Portal lit at " + event.getBlocks().get(0).getLocation().toString()));
+                        p.sendMessage(String.format("%s%s %s", ChatColor.GREEN, "Portal lit at ",  event.getBlocks().get(0).getLocation().toString()));
                         return;
                     }
                 }
@@ -140,8 +140,6 @@ public class Omneity3Listener implements Listener {
 
                         sign.update();
                         event.setCancelled(true);
-
-                        return;
                     }
                 }
             }
