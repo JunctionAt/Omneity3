@@ -128,6 +128,9 @@ public class Omneity3Listener implements Listener {
                         sign.setLine(1, "modreq to light");
                         sign.setLine(2, "this portal.");
                         sign.setLine(3, "Thanks!");
+                        sign.update();
+
+                        above.getRelative(BlockFace.UP).setType(Material.AIR);
                     }
                 }
             }
