@@ -121,7 +121,7 @@ public class Omneity3Listener implements Listener {
                     b.setType(Material.BEDROCK);
                     if (b.getLocation().getBlockY() == lowest + 1) {
                         b.setType(Material.SIGN);
-                        Sign sign = (Sign) b;
+                        Sign sign = (Sign) b.getState();
                         sign.setLine(0, "Please make a");
                         sign.setLine(1, "modreq to light");
                         sign.setLine(2, "this portal.");
