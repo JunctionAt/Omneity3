@@ -90,6 +90,9 @@ public class Omneity3Listener implements Listener {
                         break;
                     }
                 }
+                if (monster.getEquipment().getItemInHand() != null){
+                    remove = false;
+                }
                 if (remove)
                     monster.remove();
             }
