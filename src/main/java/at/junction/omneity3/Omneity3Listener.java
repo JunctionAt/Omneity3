@@ -29,28 +29,6 @@ public class Omneity3Listener implements Listener {
     }
 
     @EventHandler
-    void onPlayerJoinEvent(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        if (!player.hasPlayedBefore()) {
-            player.teleport(plugin.config.spawn.LOCATION);
-        }
-    }
-
-    @EventHandler
-    void onPlayerPortalEvent(PlayerPortalEvent event) {
-        if (event.getFrom().getWorld().getEnvironment() == World.Environment.THE_END && !plugin.config.spawn.BED_SPAWN_ENABLED) {
-            event.setTo(plugin.config.spawn.LOCATION);
-        }
-    }
-
-    @EventHandler
-    void onPlayerRespawnEvent(PlayerRespawnEvent event) {
-        if (event.isBedSpawn() && !plugin.config.spawn.BED_SPAWN_ENABLED) {
-            event.setRespawnLocation(plugin.config.spawn.LOCATION);
-        }
-    }
-
-    @EventHandler
     void onPlayerFishEvent(PlayerFishEvent event) {
         if (event.getState() == PlayerFishEvent.State.CAUGHT_ENTITY || event.getState() == PlayerFishEvent.State.CAUGHT_FISH) {
             if (new Random().nextInt(100) < 10) {
