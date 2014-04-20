@@ -101,20 +101,5 @@ public class Omneity3Listener implements Listener {
     }
 
 
-    @EventHandler
-    public void onPlayerMoveEvent(PlayerMoveEvent event) {
-        if (event.getFrom().getBlock().equals(event.getTo().getBlock())) {
-            return;
-        }
-
-        Block to = event.getTo().getBlock();
-
-        for (WarpZone wz : plugin.config.warpZones.warpZones) {
-            if (wz.from.contains(to)) {
-                event.getPlayer().teleport(wz.to);
-            }
-        }
-
-    }
 }
 

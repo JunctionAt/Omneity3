@@ -61,7 +61,7 @@ public class Configuration {
     }
 
     public class WarpZones {
-        List<WarpZone> warpZones;
+        public List<WarpZone> warpZones;
 
         public void load() {
             warpZones = new ArrayList<>();
