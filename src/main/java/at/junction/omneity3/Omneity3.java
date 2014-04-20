@@ -38,33 +38,50 @@ public class Omneity3 extends JavaPlugin {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String name, String[] args) {
-        if (command.getName().equals("spawn")) {
-            if (sender instanceof Player) {
-                ((Player) sender).teleport(config.spawn.LOCATION);
-                sender.sendMessage(ChatColor.RED + "Wooosh!");
-            } else {
-                sender.sendMessage(ChatColor.RED + "Only usable by players, sorry!");
-            }
-        } else if (command.getName().equalsIgnoreCase("o3-reload")) {
-            config.reload();
-        } else if (command.getName().equalsIgnoreCase("world")) {
-            if (args.length == 0) return false;
-            if (!(args.length == 4 || args.length == 1)) return false;
-            if (!(sender instanceof Player)){
-                sender.sendMessage("Only usable by players");
-                return false;
-            }
-            World world = getServer().getWorld(args[0]);
-            if (world == null){
-                sender.sendMessage("This world doesn't exist. Try 'world', 'world_nether', or 'world_the_end'");
-                return true;
-            }
+        switch (command.getName()) {
+            case "spawn":
+            case "SPAWN":
+                if (sender instanceof Player) {
+                    ((Player) sender).teleport(config.spawn.LOCATION);
+                    sender.sendMessage(ChatColor.RED + "Wooosh!");
+                } else {
+                    sender.sendMessage(ChatColor.RED + "Only usable by players, sorry!");
+                }
 
-            if (args.length == 4) {
-                ((Player)sender).teleport(new Location(world, Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3])));
-            } else {
-                ((Player)sender).teleport(world.getSpawnLocation());
-            }
+                break;
+            case "o3-reload":
+                config.reload();
+                break;
+            case "world":
+            case "WORLD":
+                if (args.length == 0) return false;
+                if (!(args.length == 4 || args.length == 1)) return false;
+                if (!(sender instanceof Player)){
+                    sender.sendMessage("Only usable by players");
+                    return false;
+                }
+                World world = getServer().getWorld(args[0]);
+                if (world == null){
+                    sender.sendMessage("This world doesn't exist. Try 'world', 'world_nether', or 'world_the_end'");
+                    return true;
+                }
+
+                if (args.length == 4) {
+                    ((Player)sender).teleport(new Location(world, Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3])));
+                } else {
+                    ((Player)sender).teleport(world.getSpawnLocation());
+                }
+                break;
+            case "coords":
+            case "COORDS":
+                if (sender instanceof Player){
+                    Location loc = ((Player)sender).getLocation();
+                    sender.sendMessage(String.format("%sx: %d %sy: %d %sz: %d", ChatColor.RED, loc.getBlockX(), ChatColor.BLUE, loc.getBlockY(), ChatColor.AQUA, loc.getBlockZ()));
+                } else {
+                    sender.sendMessage(String.format("%sThis command is only usable by players", ChatColor.RED));
+                }
+                break;
+
 
 
         }

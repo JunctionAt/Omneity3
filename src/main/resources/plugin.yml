@@ -20,6 +20,10 @@ commands:
     description: World teleportation
     permission: omneity.world
     usage: /world <name> [<x> <y> <z>]. Valid names are 'world', 'world_nether' and 'world_the_end'.
+  coords:
+    description: Print player's coordinates
+    permission: omneity.coords
+    usage: /coords
 
 permissions:
   omneity.spawn:
@@ -29,4 +33,8 @@ permissions:
     description: Usage of /world command
     default: op
   omneity.portal:
-    description:
+    description: Allows player to place portals
+    default: op
+  omneity.coords:
+    description: Usage of /coords command
+    default: true
