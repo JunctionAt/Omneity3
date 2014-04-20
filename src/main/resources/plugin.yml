@@ -24,7 +24,10 @@ commands:
     description: Print player's coordinates
     permission: omneity.coords
     usage: /coords
-
+  item:
+    description: Give player an item
+    aliases: [i]
+    usage: /i <item>[:data] [amount]
 permissions:
   omneity.spawn:
     description: Usage of /spawn command

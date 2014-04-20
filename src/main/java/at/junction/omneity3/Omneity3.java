@@ -83,8 +83,33 @@ public class Omneity3 extends JavaPlugin {
                     sender.sendMessage(String.format("%sThis command is only usable by players", ChatColor.RED));
                 }
                 break;
+            case "item":
+            case "ITEM":
+                if (sender instanceof Player){
+                    Player player = (Player) sender;
+                    if (args.length < 1 || args.length > 2)
+                        return false;
+                    String blockID = "";
+                    String blockData = "";
+                    String amount = "64";
+                    if (args[0].contains(":")){
+                        String [] temp = args[0].split(":");
+                        blockID = temp[0];
+                        blockData = temp[1];
+                    } else {
+                        blockID = args[0];
+                    }
 
+                    if (args.length == 2){
+                        amount = args[1];
+                    }
 
+                    getServer().dispatchCommand(player, String.format("give %s %s %d %s", player.getName(), blockID, amount, blockData));
+
+                } else {
+                    sender.sendMessage(String.format("%sThis command is only usable by players", ChatColor.RED));
+                }
+                break;
 
         }
         return true;
