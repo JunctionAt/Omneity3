@@ -33,9 +33,6 @@ public class Omneity3Listener implements Listener {
         Player player = event.getPlayer();
         if (!player.hasPlayedBefore()) {
             player.teleport(plugin.config.spawn.LOCATION);
-            if (plugin.config.spawn.FIRST_JOIN_ENABLED) {
-                plugin.getServer().broadcastMessage(String.format(plugin.config.spawn.FIRST_JOIN_MESSAGE, ChatColor.DARK_PURPLE, player.getName()));
-            }
         }
     }
 

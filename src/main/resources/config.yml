@@ -1,14 +1,12 @@
 spawn:
   location: "world,0,21,0,180.0,2.0"
   bedSpawn: true
-  firstJoinMessageEnabled: true
-  firstJoinMessage: "%sWelcome %s to the server!"
 portals:
   enabled: true
   require-modreq: true
   disable-destination-build: true
 warpzones:
-  enabled: true
+  enabled: false
   zones: []
   #- area:
   #    min: [0, 0, 0]
@@ -18,3 +16,10 @@ warpzones:
   #    location: [0, 0, 0]
   #    orientation: [0, 0]
   #    world: world
+firstjoin:
+
+  firstJoinMessageEnabled: true
+  firstJoinMessage: "%sWelcome %s to the server!"
+  itemsEnabled: false
+  items:
+  - 32xBREAD

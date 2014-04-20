@@ -1,9 +1,11 @@
 package at.junction.omneity3;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +17,11 @@ public class Configuration {
     public class Spawn {
         public Location LOCATION;
         public boolean BED_SPAWN_ENABLED;
-        public String FIRST_JOIN_MESSAGE;
-        public boolean FIRST_JOIN_ENABLED;
 
         public void load() {
             ConfigurationSection config = plugin.getConfig().getConfigurationSection("spawn");
             String[] temp = config.getString("location").split(",");
-            spawn.LOCATION = new Location(
+            LOCATION = new Location(
                     plugin.getServer().getWorld(temp[0]),
                     Double.parseDouble(temp[1]),
                     Double.parseDouble(temp[2]),
@@ -30,9 +30,7 @@ public class Configuration {
                     Float.parseFloat(temp[5])
             );
 
-            spawn.BED_SPAWN_ENABLED = config.getBoolean("bedSpawn");
-            spawn.FIRST_JOIN_MESSAGE = config.getString("firstJoinMessage");
-            spawn.FIRST_JOIN_ENABLED = config.getBoolean("firstJoinMessageEnabled");
+            BED_SPAWN_ENABLED = config.getBoolean("bedSpawn");
 
         }
     }
@@ -102,7 +100,25 @@ public class Configuration {
     }
 
     public class FirstJoin {
-        public void load(){}
+        private ConfigurationSection config = plugin.getConfig().getConfigurationSection("firstjoin");
+        public boolean ENABLED;
+        public List<ItemStack> ITEMS;
+        public String FIRST_JOIN_MESSAGE;
+        public boolean FIRST_JOIN_ENABLED;
+
+        public void load(){
+            ITEMS = new ArrayList<>();
+            ENABLED = config.getBoolean("enabled");
+
+            for (String s : config.getStringList("itemsEnabled")){
+                String [] temp = s.split("x");
+                Material mat = Material.valueOf(temp[1]);
+                int count = Integer.parseInt(temp[0]);
+                ITEMS.add(new ItemStack(mat, count));
+            }
+            FIRST_JOIN_MESSAGE = config.getString("firstJoinMessage");
+            FIRST_JOIN_ENABLED = config.getBoolean("firstJoinMessageEnabled");
+        }
     }
     public Spawn spawn;
     public Recipes recipes;
