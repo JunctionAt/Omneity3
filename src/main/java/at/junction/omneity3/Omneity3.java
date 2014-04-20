@@ -1,5 +1,6 @@
 package at.junction.omneity3;
 
+import at.junction.omneity3.listeners.PortalListener;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -29,6 +30,7 @@ public class Omneity3 extends JavaPlugin {
         config = new Configuration(this);
         config.load();
         getServer().getPluginManager().registerEvents(new Omneity3Listener(this), this);
+        getServer().getPluginManager().registerEvents(new PortalListener(this), this);
         loadRecipes();
     }
 

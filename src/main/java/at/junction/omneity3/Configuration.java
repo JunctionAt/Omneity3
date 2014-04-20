@@ -50,9 +50,9 @@ public class Configuration {
     }
 
     public class Portals {
-        boolean PORTALS_ENABLED;
-        boolean MODREQ_PORTALS;
-        boolean DISABLE_DESTINATION_BUILD;
+        public boolean PORTALS_ENABLED;
+        public boolean MODREQ_PORTALS;
+        public boolean DISABLE_DESTINATION_BUILD;
 
         public void load() {
             ConfigurationSection config = plugin.getConfig().getConfigurationSection("portals");
@@ -101,11 +101,15 @@ public class Configuration {
         }
     }
 
+    public class FirstJoin {
+        public void load(){}
+    }
+    public Spawn spawn;
+    public Recipes recipes;
+    public Portals portals;
+    public WarpZones warpZones;
+    public FirstJoin firstJoin;
 
-    Spawn spawn;
-    Recipes recipes;
-    Portals portals;
-    WarpZones warpZones;
 
     public Configuration(Omneity3 plugin) {
         this.plugin = plugin;
@@ -113,6 +117,7 @@ public class Configuration {
         recipes = new Recipes();
         portals = new Portals();
         warpZones = new WarpZones();
+        firstJoin = new FirstJoin();
     }
 
     public void load() {
@@ -120,11 +125,13 @@ public class Configuration {
         recipes.load();
         portals.load();
         warpZones.load();
+        firstJoin.load();
     }
 
     public void reload() {
         spawn.load();
         portals.load();
         warpZones.load();
+        firstJoin.load();
     }
 }
