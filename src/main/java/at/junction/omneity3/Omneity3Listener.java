@@ -90,7 +90,8 @@ public class Omneity3Listener implements Listener {
                         break;
                     }
                 }
-                if (monster.getEquipment().getItemInHand() != null){
+                if ((monster.getEquipment().getItemInHand() != null) ||
+                        (monster.getType() == EntityType.SKELETON && monster.getEquipment().getItemInHand().getType() == Material.BOW)){
                     remove = false;
                 }
                 if (remove)
