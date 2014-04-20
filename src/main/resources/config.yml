@@ -7,3 +7,14 @@ portals:
   enabled: true
   require-modreq: true
   disable-destination-build: true
+warpzones:
+  enabled: true
+  zones: []
+  #- area:
+  #    min: [0, 0, 0]
+  #    max: [0, 0, 0]
+  #    world: world
+  #  to:
+  #    location: [0, 0, 0]
+  #    orientation: [0, 0]
+  #    world: world

@@ -4,6 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -12,6 +13,7 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.List;
 
 public class Omneity3 extends JavaPlugin {
     public Configuration config;
@@ -111,5 +113,16 @@ public class Omneity3 extends JavaPlugin {
         ironBarding.setIngredient('A', Material.IRON_INGOT);
         ironBarding.setIngredient('S', Material.SADDLE);
         getServer().addRecipe(ironBarding);
+    }
+}
+
+class WarpZone {
+
+    List<Block> from;
+    Location to;
+
+    public WarpZone(List<Block> from, Location to) {
+        this.from = from;
+        this.to = to;
     }
 }

@@ -14,10 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerFishEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerPortalEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.event.world.PortalCreateEvent;
 import org.bukkit.inventory.ItemStack;
@@ -97,7 +94,7 @@ public class Omneity3Listener implements Listener {
                     }
                 }
                 if ((monster.getEquipment().getItemInHand() != null) ||
-                        (monster.getType() == EntityType.SKELETON && monster.getEquipment().getItemInHand().getType() != Material.BOW)){
+                        (monster.getType() == EntityType.SKELETON && monster.getEquipment().getItemInHand().getType() != Material.BOW)) {
                     remove = false;
                 }
                 if (remove)
@@ -115,7 +112,7 @@ public class Omneity3Listener implements Listener {
                 if (p.hasPermission("omneity.portal")) {
                     double distance = p.getLocation().distanceSquared(event.getBlocks().get(0).getLocation());
                     if (distance < 10) {
-                        p.sendMessage(String.format("%s%s %s", ChatColor.GREEN, "Portal lit at ",  event.getBlocks().get(0).getLocation().toString()));
+                        p.sendMessage(String.format("%s%s %s", ChatColor.GREEN, "Portal lit at ", event.getBlocks().get(0).getLocation().toString()));
                         return;
                     }
                 }
@@ -158,6 +155,22 @@ public class Omneity3Listener implements Listener {
                 event.setCancelled(true);
             }
         }
+    }
+
+    @EventHandler
+    public void onPlayerMoveEvent(PlayerMoveEvent event) {
+        if (event.getFrom().getBlock().equals(event.getTo().getBlock())) {
+            return;
+        }
+
+        Block to = event.getTo().getBlock();
+
+        for (WarpZone wz : plugin.config.warpZones.warpZones) {
+            if (wz.from.contains(to)) {
+                event.getPlayer().teleport(wz.to);
+            }
+        }
+
     }
 }
 

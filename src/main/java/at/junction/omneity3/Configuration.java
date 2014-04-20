@@ -1,7 +1,13 @@
 package at.junction.omneity3;
 
 import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class Configuration {
     Omneity3 plugin;
@@ -47,6 +53,7 @@ public class Configuration {
         boolean PORTALS_ENABLED;
         boolean MODREQ_PORTALS;
         boolean DISABLE_DESTINATION_BUILD;
+
         public void load() {
             ConfigurationSection config = plugin.getConfig().getConfigurationSection("portals");
             PORTALS_ENABLED = config.getBoolean("enabled");
@@ -55,26 +62,69 @@ public class Configuration {
         }
     }
 
+    public class WarpZones {
+        List<WarpZone> warpZones;
+
+        public void load() {
+            warpZones = new ArrayList<>();
+
+            ConfigurationSection config = plugin.getConfig().getConfigurationSection("warpzones");
+            if (config.getBoolean("enabled")) {
+                List<Map<?, ?>> zones = config.getMapList("zones");
+                for (Map<?, ?> zone : zones) {
+                    Map<?, ?> area = (Map<?, ?>) zone.get("area");
+                    List<Integer> min = (List<Integer>) area.get("min");
+                    List<Integer> max = (List<Integer>) area.get("max");
+                    World fromWorld = plugin.getServer().getWorld((String) area.get("world"));
+
+
+                    Map<?, ?> to = (Map<?, ?>) zone.get("to");
+                    List<Integer> toLoc = (List<Integer>) to.get("location");
+                    List<Integer> orientation = (List<Integer>) to.get("orientation");
+                    World toWorld = plugin.getServer().getWorld((String) to.get("world"));
+                    Location toLocation = new Location(toWorld, toLoc.get(0), toLoc.get(1), toLoc.get(2), orientation.get(1), orientation.get(2));
+
+                    List<Block> tempLocations = new ArrayList<>();
+                    for (int x = min.get(0); x < max.get(0); x++) {
+                        for (int y = min.get(1); y < max.get(1); y++) {
+                            for (int z = min.get(2); z < max.get(2); z++) {
+                                Location loc = new Location(fromWorld, x, y, z);
+                                tempLocations.add(loc.getBlock());
+                            }
+                        }
+
+                    }
+                    warpZones.add(new WarpZone(tempLocations, toLocation));
+                }
+
+            }
+        }
+    }
+
 
     Spawn spawn;
     Recipes recipes;
     Portals portals;
+    WarpZones warpZones;
 
     public Configuration(Omneity3 plugin) {
         this.plugin = plugin;
         spawn = new Spawn();
         recipes = new Recipes();
         portals = new Portals();
+        warpZones = new WarpZones();
     }
 
     public void load() {
         spawn.load();
         recipes.load();
         portals.load();
+        warpZones.load();
     }
 
     public void reload() {
         spawn.load();
         portals.load();
+        warpZones.load();
     }
 }
