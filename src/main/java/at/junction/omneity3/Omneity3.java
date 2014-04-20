@@ -104,7 +104,7 @@ public class Omneity3 extends JavaPlugin {
                         amount = args[1];
                     }
 
-                    getServer().dispatchCommand(player, String.format("give %s %s %d %s", player.getName(), blockID, amount, blockData));
+                    getServer().dispatchCommand(player, String.format("give %s %s %s %s", player.getName(), blockID, amount, blockData));
 
                 } else {
                     sender.sendMessage(String.format("%sThis command is only usable by players", ChatColor.RED));
