@@ -119,8 +119,16 @@ public class Omneity3 extends JavaPlugin {
                 getServer().dispatchCommand(sender, "cmodify -g:base_assistance");
                 break;
 
-
-
+            case "trace":
+            case "TRACE":
+                if (args.length < 1 || args.length > 2) {
+                    return false;
+                } else if (args.length == 1) {
+                    getServer().dispatchCommand(sender, String.format("lb lookup player %s sum blocks block 1 block 56 block 14 block 129", args[0]));
+                } else if (args.length == 2) {
+                    getServer().dispatchCommand(sender, String.format("lb lookup player %s sum blocks block 1 block 56 block 14 block 129 since %s days", args[0], args[1]));
+                }
+                break;
         }
         return true;
     }

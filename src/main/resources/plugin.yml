@@ -27,13 +27,20 @@ commands:
   item:
     description: Give player an item
     aliases: [i]
+    permission: omneity.aliases
     usage: /i <item>[:data] [amount]
   staffchest:
     description: Lock a chest to staff
+    permission: omneity.aliases
     usage: /staffchest
   unstaff:
     description: Remove staff perms on chest
+    permission: omneity.aliases
     usage: /unstaff
+  trace:
+    description: Trace player's block edits
+    permission: omneity.aliases
+    usage: /trace <playername>
 permissions:
   omneity.spawn:
     description: Usage of /spawn command
@@ -46,4 +53,7 @@ permissions:
     default: op
   omneity.coords:
     description: Usage of /coords command
+    default: true
+  omneity.aliases:
+    description: Use of aliases. Permissions dealt with based on commands being run through dispatch.
     default: true
