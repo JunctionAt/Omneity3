@@ -28,6 +28,12 @@ commands:
     description: Give player an item
     aliases: [i]
     usage: /i <item>[:data] [amount]
+  staffchest:
+    description: Lock a chest to staff
+    usage: /staffchest
+  unstaff:
+    description: Remove staff perms on chest
+    usage: /unstaff
 permissions:
   omneity.spawn:
     description: Usage of /spawn command

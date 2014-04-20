@@ -58,26 +58,26 @@ public class Omneity3 extends JavaPlugin {
             case "WORLD":
                 if (args.length == 0) return false;
                 if (!(args.length == 4 || args.length == 1)) return false;
-                if (!(sender instanceof Player)){
+                if (!(sender instanceof Player)) {
                     sender.sendMessage("Only usable by players");
                     return false;
                 }
                 World world = getServer().getWorld(args[0]);
-                if (world == null){
+                if (world == null) {
                     sender.sendMessage("This world doesn't exist. Try 'world', 'world_nether', or 'world_the_end'");
                     return true;
                 }
 
                 if (args.length == 4) {
-                    ((Player)sender).teleport(new Location(world, Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3])));
+                    ((Player) sender).teleport(new Location(world, Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3])));
                 } else {
-                    ((Player)sender).teleport(world.getSpawnLocation());
+                    ((Player) sender).teleport(world.getSpawnLocation());
                 }
                 break;
             case "coords":
             case "COORDS":
-                if (sender instanceof Player){
-                    Location loc = ((Player)sender).getLocation();
+                if (sender instanceof Player) {
+                    Location loc = ((Player) sender).getLocation();
                     sender.sendMessage(String.format("%sx: %d %sy: %d %sz: %d", ChatColor.RED, loc.getBlockX(), ChatColor.BLUE, loc.getBlockY(), ChatColor.AQUA, loc.getBlockZ()));
                 } else {
                     sender.sendMessage(String.format("%sThis command is only usable by players", ChatColor.RED));
@@ -85,22 +85,22 @@ public class Omneity3 extends JavaPlugin {
                 break;
             case "item":
             case "ITEM":
-                if (sender instanceof Player){
+                if (sender instanceof Player) {
                     Player player = (Player) sender;
                     if (args.length < 1 || args.length > 2)
                         return false;
                     String blockID = "";
                     String blockData = "";
                     String amount = "64";
-                    if (args[0].contains(":")){
-                        String [] temp = args[0].split(":");
+                    if (args[0].contains(":")) {
+                        String[] temp = args[0].split(":");
                         blockID = temp[0];
                         blockData = temp[1];
                     } else {
                         blockID = args[0];
                     }
 
-                    if (args.length == 2){
+                    if (args.length == 2) {
                         amount = args[1];
                     }
 
@@ -110,6 +110,16 @@ public class Omneity3 extends JavaPlugin {
                     sender.sendMessage(String.format("%sThis command is only usable by players", ChatColor.RED));
                 }
                 break;
+            case "staffchest":
+            case "STAFFCHEST":
+                getServer().dispatchCommand(sender, "cmodify g:base_assistance");
+                break;
+            case "unstaff":
+            case "UNSTAFF":
+                getServer().dispatchCommand(sender, "cmodify -g:base_assistance");
+                break;
+
+
 
         }
         return true;
