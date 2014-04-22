@@ -41,6 +41,10 @@ commands:
     description: Trace player's block edits
     permission: omneity.aliases
     usage: /trace <playername>
+  tppos:
+    description: Teleport player to coordinate
+    permission: omneity.aliases
+    usage: /tppos [<world>] <x> <y> <z>
 permissions:
   omneity.spawn:
     description: Usage of /spawn command

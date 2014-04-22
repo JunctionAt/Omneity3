@@ -8,7 +8,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -17,7 +16,6 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.List;
 
 public class Omneity3 extends JavaPlugin {
     public Configuration config;
@@ -137,6 +135,15 @@ public class Omneity3 extends JavaPlugin {
                     getServer().dispatchCommand(sender, String.format("lb lookup player %s sum blocks block 1 block 56 block 14 block 129 since %s days", args[0], args[1]));
                 }
                 break;
+            case "tppos":
+            case "TPPOS":
+                if (args.length == 4){
+                    getServer().dispatchCommand(sender, String.format("world %s %s %s %s", args[0], args[1], args[2], args[3]));
+                } else if (args.length == 3){
+                    getServer().dispatchCommand(sender, String.format("tp %s %s %s", args[0], args[1], args[2]));
+                } else {
+                    return false;
+                }
         }
         return true;
     }
