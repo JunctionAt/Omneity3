@@ -45,6 +45,10 @@ commands:
     description: Teleport player to coordinate
     permission: omneity.aliases
     usage: /tppos [<world>] <x> <y> <z>
+  entity-magnet:
+    description: Allows player to become a magnet for entities
+    permission: omneity.magnet
+    usage: /entity-magnet <entity-name>
 permissions:
   omneity.spawn:
     description: Usage of /spawn command
@@ -61,3 +65,6 @@ permissions:
   omneity.aliases:
     description: Use of aliases. Permissions dealt with based on commands being run through dispatch.
     default: true
+  omneity.magnet:
+    description: Entity Magnet!
+    default: op

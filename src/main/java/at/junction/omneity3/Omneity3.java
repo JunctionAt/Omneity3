@@ -1,18 +1,18 @@
 package at.junction.omneity3;
 
-import at.junction.omneity3.listeners.FirstJoinListener;
-import at.junction.omneity3.listeners.PortalListener;
-import at.junction.omneity3.listeners.SpawnListener;
-import at.junction.omneity3.listeners.WarpZoneListener;
+import at.junction.omneity3.listeners.*;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -35,6 +35,7 @@ public class Omneity3 extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FirstJoinListener(this), this);
         getServer().getPluginManager().registerEvents(new WarpZoneListener(this), this);
         getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
+        getServer().getPluginManager().registerEvents(new EntityMagnetListener(this), this);
         loadRecipes();
     }
 
@@ -143,6 +144,25 @@ public class Omneity3 extends JavaPlugin {
                     getServer().dispatchCommand(sender, String.format("tp %s %s %s", args[0], args[1], args[2]));
                 } else {
                     return false;
+                }
+                break;
+            case "entity-magnet":
+
+                if (args.length != 1){
+                    return false;
+                } else {
+                    if (sender instanceof Player){
+
+                        Player player = (Player) sender;
+                        if (args[0].equals("clear")){
+                            if (player.hasMetadata("entity-magnet")){
+                                player.removeMetadata("entity-magnet", this);
+                            }
+                        }
+                        EntityType entityType = EntityType.valueOf(args[0]);
+                        player.setMetadata("entity-magnet", new FixedMetadataValue(this, entityType));
+                    }
+
                 }
         }
         return true;
