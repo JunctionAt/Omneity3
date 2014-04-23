@@ -12,15 +12,14 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Omneity3 extends JavaPlugin {
     public Configuration config;
-
+    ArrayList<EntityType> blockedEntities;
     @Override
     public void onEnable() {
         File cfile = new File(getDataFolder(), "config.yml");
@@ -37,6 +36,17 @@ public class Omneity3 extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new WarpZoneListener(this), this);
         getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
         loadRecipes();
+
+        blockedEntities = new ArrayList<>();
+        blockedEntities.add(EntityType.ITEM_FRAME);
+        blockedEntities.add(EntityType.FALLING_BLOCK);
+        blockedEntities.add(EntityType.PLAYER);
+        blockedEntities.add(EntityType.MINECART);
+        blockedEntities.add(EntityType.BOAT);
+        blockedEntities.add(EntityType.COMPLEX_PART);
+        blockedEntities.add(EntityType.UNKNOWN);
+        blockedEntities.add(EntityType.DROPPED_ITEM);
+
     }
 
 
@@ -138,9 +148,9 @@ public class Omneity3 extends JavaPlugin {
                 break;
             case "tppos":
             case "TPPOS":
-                if (args.length == 4){
+                if (args.length == 4) {
                     getServer().dispatchCommand(sender, String.format("world %s %s %s %s", args[0], args[1], args[2], args[3]));
-                } else if (args.length == 3){
+                } else if (args.length == 3) {
                     getServer().dispatchCommand(sender, String.format("tp %s %s %s", args[0], args[1], args[2]));
                 } else {
                     return false;
@@ -148,34 +158,39 @@ public class Omneity3 extends JavaPlugin {
                 break;
             case "entity-magnet":
 
-                if (args.length != 2){
+                if (args.length != 2) {
                     return false;
                 } else {
-                    if (sender instanceof Player){
+                    if (sender instanceof Player) {
 
                         Player player = (Player) sender;
                         EntityType entityType = null;
                         try {
                             entityType = EntityType.valueOf(args[0].toUpperCase());
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             player.sendMessage("Entity type does not exist");
                             return true;
                         }
                         double range = 0;
-                        if (range > 50){
+                        if (range > 50) {
                             sender.sendMessage("You don't have enough power! Entity magnet only works up to 50 blocks away.");
                             return true;
                         }
 
+                        if (blockedEntities.contains(entityType)) {
+                            sender.sendMessage("Magnet doesn't work on this block :(");
+                            return true;
+                        }
+
                         try {
-                            range = Double.parseDouble(args[1])/2;
-                        } catch (Exception e){
+                            range = Double.parseDouble(args[1]) / 2;
+                        } catch (Exception e) {
                             player.sendMessage("Invalid range");
                             return true;
                         }
 
-                        for (Entity e : player.getNearbyEntities(range, range, range)){
-                            if (e.getType().equals(entityType)){
+                        for (Entity e : player.getNearbyEntities(range, range, range)) {
+                            if (e.getType().equals(entityType)) {
                                 e.teleport(player);
                             }
                         }
