@@ -162,6 +162,11 @@ public class Omneity3 extends JavaPlugin {
                             return true;
                         }
                         double range = 0;
+                        if (range > 50){
+                            sender.sendMessage("You don't have enough power! Entity magnet only works up to 50 blocks away.");
+                            return true;
+                        }
+
                         try {
                             range = Double.parseDouble(args[1])/2;
                         } catch (Exception e){
