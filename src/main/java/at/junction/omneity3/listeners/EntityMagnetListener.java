@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
@@ -14,7 +15,7 @@ public class EntityMagnetListener implements Listener {
     public EntityMagnetListener(Omneity3 plugin) {
         this.plugin = plugin;
     }
-
+    @EventHandler
     public void onPlayerMoveEvent(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         if (player.hasMetadata("entity-magnet")) {
