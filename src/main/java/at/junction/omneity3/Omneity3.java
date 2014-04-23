@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -161,6 +162,10 @@ public class Omneity3 extends JavaPlugin {
                         }
                         EntityType entityType = EntityType.valueOf(args[0]);
                         player.setMetadata("entity-magnet", new FixedMetadataValue(this, entityType));
+                        player.sendMessage("Types enabled:");
+                        for(MetadataValue value : player.getMetadata("entity-magnet")){
+                            player.sendMessage(((EntityType)value.value()).name());
+                        }
                     }
 
                 }

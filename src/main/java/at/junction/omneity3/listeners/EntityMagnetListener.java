@@ -17,13 +17,16 @@ public class EntityMagnetListener implements Listener {
 
     public void onPlayerMoveEvent(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        if (player.hasMetadata("entity-magnet")){
-            EntityType type = (EntityType)player.getMetadata("entity-magnet").get(0).value();
+        if (player.hasMetadata("entity-magnet")) {
+            EntityType type = (EntityType) player.getMetadata("entity-magnet").get(0).value();
             Location loc = event.getTo();
-            for (Entity e : loc.getChunk().getEntities()){
-                if (e.getLocation().distanceSquared(loc) < 5){
-                    e.setFallDistance(0.0f);
-                    e.teleport(loc);
+            for (Entity e : loc.getChunk().getEntities()) {
+                if (e.getType() == player.getMetadata("entity-magnet").get(0).value()) {
+                    if (e.getLocation().distanceSquared(loc) < 25) {
+                        player.sendMessage("Found entity! Teleporting to you.");
+                        e.setFallDistance(0.0f);
+                        e.teleport(loc);
+                    }
                 }
             }
         }
