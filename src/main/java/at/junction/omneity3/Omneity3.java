@@ -36,7 +36,6 @@ public class Omneity3 extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FirstJoinListener(this), this);
         getServer().getPluginManager().registerEvents(new WarpZoneListener(this), this);
         getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
-        getServer().getPluginManager().registerEvents(new EntityMagnetListener(this), this);
         loadRecipes();
     }
 
@@ -149,23 +148,33 @@ public class Omneity3 extends JavaPlugin {
                 break;
             case "entity-magnet":
 
-                if (args.length != 1){
+                if (args.length != 2){
                     return false;
                 } else {
                     if (sender instanceof Player){
 
                         Player player = (Player) sender;
-                        if (args[0].equals("clear")){
-                            if (player.hasMetadata("entity-magnet")){
-                                player.removeMetadata("entity-magnet", this);
+                        EntityType entityType = null;
+                        try {
+                            entityType = EntityType.valueOf(args[0].toUpperCase());
+                        } catch (Exception e){
+                            player.sendMessage("Entity type does not exist");
+                            return true;
+                        }
+                        double range = 0;
+                        try {
+                            range = Double.parseDouble(args[1])/2;
+                        } catch (Exception e){
+                            player.sendMessage("Invalid range");
+                            return true;
+                        }
+
+                        for (Entity e : player.getNearbyEntities(range, range, range)){
+                            if (e.getType().equals(entityType)){
+                                e.teleport(player);
                             }
                         }
-                        EntityType entityType = EntityType.valueOf(args[0]);
-                        player.setMetadata("entity-magnet", new FixedMetadataValue(this, entityType));
-                        player.sendMessage("Types enabled:");
-                        for(MetadataValue value : player.getMetadata("entity-magnet")){
-                            player.sendMessage(((EntityType)value.value()).name());
-                        }
+
                     }
 
                 }
