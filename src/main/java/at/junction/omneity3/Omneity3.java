@@ -70,6 +70,7 @@ public class Omneity3 extends JavaPlugin {
                 break;
             case "o3-reload":
                 config.reload();
+                sender.sendMessage(String.format("%sDone.", ChatColor.RED));
                 break;
             case "world":
             case "WORLD":
