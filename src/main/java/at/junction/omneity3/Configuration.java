@@ -110,7 +110,7 @@ public class Configuration {
             ITEMS = new ArrayList<>();
             ENABLED = config.getBoolean("enabled");
 
-            for (String s : config.getStringList("itemsEnabled")){
+            for (String s : config.getStringList("items")){
                 String [] temp = s.split("x");
                 Material mat = Material.valueOf(temp[1]);
                 int count = Integer.parseInt(temp[0]);
