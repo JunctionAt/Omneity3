@@ -145,6 +145,7 @@ public class Configuration {
     }
 
     public void reload() {
+        plugin.reloadConfig();
         spawn.load();
         portals.load();
         warpZones.load();
