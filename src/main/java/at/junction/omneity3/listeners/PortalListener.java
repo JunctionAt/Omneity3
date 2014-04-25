@@ -25,7 +25,7 @@ public class PortalListener implements Listener {
             for (Player p : plugin.getServer().getOnlinePlayers()) {
                 if (p.hasPermission("omneity.portal")) {
                     double distance = p.getLocation().distanceSquared(event.getBlocks().get(0).getLocation());
-                    if (distance < 10) {
+                    if (distance < 25) {
                         p.sendMessage(String.format("%s%s %s", ChatColor.GREEN, "Portal lit at ", event.getBlocks().get(0).getLocation().toString()));
                         return;
                     }
