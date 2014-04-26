@@ -40,6 +40,7 @@ public class Omneity3 extends JavaPlugin  {
         getServer().getPluginManager().registerEvents(new FirstJoinListener(this), this);
         getServer().getPluginManager().registerEvents(new WarpZoneListener(this), this);
         getServer().getPluginManager().registerEvents(new SpawnListener(this), this);
+        getServer().getPluginManager().registerEvents(new petKillListener(this), this);
         loadRecipes();
 
         blockedEntities = new ArrayList<>();

@@ -122,13 +122,19 @@ public class Configuration {
     }
 
     public class BungeeSwap {
-        private ConfigurationSection config = plugin.getConfig().getConfigurationSection("bugnee-swap");
-        public boolean ENABLED;
+
         public String SERVER;
 
         public void load(){
-            ENABLED = config.getBoolean("enabled");
-            SERVER = config.getString("server");
+            SERVER = plugin.getConfig().getString("swap-server");
+        }
+    }
+
+    public class PetKill {
+        public boolean DISABLED;
+
+        public void load(){
+            DISABLED = plugin.getConfig().getBoolean("pet-kill-disabled");
         }
     }
 
@@ -138,6 +144,7 @@ public class Configuration {
     public WarpZones warpZones;
     public FirstJoin firstJoin;
     public BungeeSwap bungeeSwap;
+    public PetKill petKill;
 
 
     public Configuration(Omneity3 plugin) {
@@ -148,6 +155,7 @@ public class Configuration {
         warpZones = new WarpZones();
         firstJoin = new FirstJoin();
         bungeeSwap = new BungeeSwap();
+        petKill = new PetKill();
     }
 
     public void load() {
@@ -157,6 +165,7 @@ public class Configuration {
         warpZones.load();
         firstJoin.load();
         bungeeSwap.load();
+        petKill.load();
     }
 
     public void reload() {
@@ -165,5 +174,6 @@ public class Configuration {
         portals.load();
         warpZones.load();
         firstJoin.load();
+        petKill.load();
     }
 }

@@ -22,6 +22,5 @@ firstjoin:
   itemsEnabled: false
   items:
   - 32xBREAD
-bungeeswap:
-  enabled: true
-  server: chaos
+swap-server: chaos
+pet-kill-disabled: true
