@@ -13,13 +13,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutput;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 
-public class Omneity3 extends JavaPlugin {
+public class Omneity3 extends JavaPlugin  {
     public Configuration config;
     ArrayList<EntityType> blockedEntities;
+    public DataOutputStream bungeePluginChannel;
     @Override
     public void onEnable() {
         File cfile = new File(getDataFolder(), "config.yml");
@@ -47,12 +52,19 @@ public class Omneity3 extends JavaPlugin {
         blockedEntities.add(EntityType.UNKNOWN);
         blockedEntities.add(EntityType.DROPPED_ITEM);
 
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        bungeePluginChannel = new DataOutputStream(new ByteArrayOutputStream());
+
     }
 
 
     @Override
     public void onDisable() {
-
+        try {
+            bungeePluginChannel.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -199,6 +211,23 @@ public class Omneity3 extends JavaPlugin {
                     }
 
                 }
+                break;
+            case "swap-player":
+                if (args.length != 2){
+                    return false;
+                }
+                Player p = getServer().getPlayer(args[0]);
+                bungeePluginChannel = new DataOutputStream(new ByteArrayOutputStream());
+                ByteArrayOutputStream b = new ByteArrayOutputStream();
+                DataOutputStream out = new DataOutputStream(b);
+                try {
+                    out.writeUTF("Connect");
+                    out.writeUTF(config.bungeeSwap.SERVER);
+                    p.sendPluginMessage(this, "BungeeCord", b.toByteArray());
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+                break;
         }
         return true;
     }

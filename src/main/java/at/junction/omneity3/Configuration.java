@@ -120,11 +120,24 @@ public class Configuration {
             FIRST_JOIN_ENABLED = config.getBoolean("firstJoinMessageEnabled");
         }
     }
+
+    public class BungeeSwap {
+        private ConfigurationSection config = plugin.getConfig().getConfigurationSection("bugnee-swap");
+        public boolean ENABLED;
+        public String SERVER;
+
+        public void load(){
+            ENABLED = config.getBoolean("enabled");
+            SERVER = config.getString("server");
+        }
+    }
+
     public Spawn spawn;
     public Recipes recipes;
     public Portals portals;
     public WarpZones warpZones;
     public FirstJoin firstJoin;
+    public BungeeSwap bungeeSwap;
 
 
     public Configuration(Omneity3 plugin) {
@@ -134,6 +147,7 @@ public class Configuration {
         portals = new Portals();
         warpZones = new WarpZones();
         firstJoin = new FirstJoin();
+        bungeeSwap = new BungeeSwap();
     }
 
     public void load() {
@@ -142,6 +156,7 @@ public class Configuration {
         portals.load();
         warpZones.load();
         firstJoin.load();
+        bungeeSwap.load();
     }
 
     public void reload() {

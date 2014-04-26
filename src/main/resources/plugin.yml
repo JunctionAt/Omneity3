@@ -49,6 +49,10 @@ commands:
     description: Allows player to become a magnet for entities
     permission: omneity.magnet
     usage: /entity-magnet <entity-name>
+  swap-player:
+    description: Swap player to server
+    permission: omneity.swap
+    usage: /swap-player player server
 permissions:
   omneity.spawn:
     description: Usage of /spawn command
@@ -67,4 +71,7 @@ permissions:
     default: true
   omneity.magnet:
     description: Entity Magnet!
+    default: op
+  omneity.swap:
+    description: /swap-player usage
     default: op

@@ -17,9 +17,11 @@ warpzones:
   #    orientation: [0, 0]
   #    world: world
 firstjoin:
-
   firstJoinMessageEnabled: true
   firstJoinMessage: "%sWelcome %s to the server!"
   itemsEnabled: false
   items:
   - 32xBREAD
+bungeeswap:
+  enabled: true
+  server: chaos
