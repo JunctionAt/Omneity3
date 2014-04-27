@@ -18,7 +18,9 @@ public class FirstJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (plugin.config.firstJoin.ENABLED) {
             if (!event.getPlayer().hasPlayedBefore()) {
-                event.getPlayer().getInventory().addItem((ItemStack[]) plugin.config.firstJoin.ITEMS.toArray());
+                for (ItemStack is : plugin.config.firstJoin.ITEMS){
+                    event.getPlayer().getInventory().addItem(is);
+                }
                 if (plugin.config.firstJoin.FIRST_JOIN_ENABLED) {
                     plugin.getServer().broadcastMessage(String.format(plugin.config.firstJoin.FIRST_JOIN_MESSAGE, ChatColor.DARK_PURPLE, event.getPlayer().getName()));
                 }
