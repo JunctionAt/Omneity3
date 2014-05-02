@@ -48,6 +48,7 @@ public class Configuration {
             SHAPELESS = new ArrayList<>();
             Map<String, Object> temp;
             temp = plugin.getConfig().getConfigurationSection("recipes.furnace").getValues(true);
+            System.out.println(temp.size());
             for (Object o: temp.values()){
                 if (o instanceof Furnace){
                     FURNACES.add((Furnace)o);
