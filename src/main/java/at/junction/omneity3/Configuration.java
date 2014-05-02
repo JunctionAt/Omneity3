@@ -38,44 +38,18 @@ public class Configuration {
     }
 
     public class Recipes {
+
         public List<Furnace> FURNACES;
         public List<Shaped> SHAPED;
         public List<Shapeless> SHAPELESS;
 
         public void load() {
-            FURNACES = new ArrayList<>();
-            SHAPED = new ArrayList<>();
-            SHAPELESS = new ArrayList<>();
-            Map<String, Object> temp;
-            temp = plugin.getConfig().getConfigurationSection("recipes.furnace").getValues(true);
-            System.out.println(temp.size());
-            for (Object o: temp.values()){
-                if (o instanceof Furnace){
-                    FURNACES.add((Furnace)o);
-                } else {
-                    System.out.println("Object not instanceof Furnace");
-                }
-            }
+            FURNACES = (List<Furnace>)plugin.getConfig().getList("recipes.furnace");
+            SHAPED = (List<Shaped>)plugin.getConfig().getList("recipes.shaped");
+            SHAPELESS = (List<Shapeless>)plugin.getConfig().getList("recipes.shapeless");
+
             plugin.getLogger().info(String.format("%s FURNACES recipes loaded", FURNACES.size()));
-
-            temp = plugin.getConfig().getConfigurationSection("recipes.shaped").getValues(true);
-            for (Object o : temp.values()){
-                if (o instanceof Shaped){
-                    SHAPED.add((Shaped)o);
-                } else {
-                    System.out.println("Object not instanceof Shaped");
-                }
-            }
             plugin.getLogger().info(String.format("%s SHAPED recipes loaded", SHAPED.size()));
-
-            temp = plugin.getConfig().getConfigurationSection("recipes.shapeless").getValues(true);
-            for (Object o : temp.values()){
-                if (o instanceof Shapeless){
-                    SHAPELESS.add((Shapeless) o);
-                } else {
-                    System.out.println("Object not instanceof Shapeless");
-                }
-            }
             plugin.getLogger().info(String.format("%s SHAPELESS recipes loaded", SHAPELESS.size()));
         }
     }
