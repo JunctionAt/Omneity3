@@ -1,5 +1,6 @@
 package at.junction.omneity3.recipes;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.inventory.ItemStack;
@@ -17,9 +18,10 @@ public class Shaped implements ConfigurationSerializable {
     public Shaped(Map<String, Object> map){
         shape = ((String)map.get("shape")).split("-");
         List<String> ingredients = ((List<String>)map.get("ingredients"));
-
+        System.out.println(ingredients.size());
         ingredientMap = new HashMap<>();
         for (String i : ingredients){
+            System.out.println(i);
             String[] temp = i.split("|");
             ingredientMap.put(temp[0].charAt(0), Material.valueOf(temp[1]));
         }
