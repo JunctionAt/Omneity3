@@ -57,3 +57,4 @@ recipes:
       - VINE
       - COBBLESTONE
       result: MOSSY_COBBLESTONE
+      count: 1

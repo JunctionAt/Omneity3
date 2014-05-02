@@ -22,7 +22,7 @@ public class Shaped implements ConfigurationSerializable {
         ingredientMap = new HashMap<>();
         for (String i : ingredients){
             System.out.println(i);
-            String[] temp = i.split("|");
+            String[] temp = i.split("\\|");
             ingredientMap.put(temp[0].charAt(0), Material.valueOf(temp[1]));
         }
 
