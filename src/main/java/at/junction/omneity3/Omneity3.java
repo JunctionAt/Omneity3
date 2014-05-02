@@ -236,11 +236,11 @@ public class Omneity3 extends JavaPlugin  {
 
     public void loadRecipes() {
         System.out.println(String.format("%s %s %s", config.recipes.FURNACES.size(), config.recipes.SHAPED.size(), config.recipes.SHAPELESS.size()));
-        for (Furnace furnace : config.recipes.FURNACES.values()){
+        for (Furnace furnace : config.recipes.FURNACES){
             FurnaceRecipe furnaceRecipe = new FurnaceRecipe(new ItemStack(furnace.result), furnace.source);
             getServer().addRecipe(furnaceRecipe);
         }
-        for (Shaped shaped : config.recipes.SHAPED.values()){
+        for (Shaped shaped : config.recipes.SHAPED){
             ShapedRecipe shapedRecipe = new ShapedRecipe(shaped.result);
             shapedRecipe.shape(shaped.shape);
             for (Character key : shaped.ingredientMap.keySet()){
@@ -249,7 +249,7 @@ public class Omneity3 extends JavaPlugin  {
             getServer().addRecipe(shapedRecipe);
         }
 
-        for (Shapeless shapeless : config.recipes.SHAPELESS.values()){
+        for (Shapeless shapeless : config.recipes.SHAPELESS){
             ShapelessRecipe shapelessRecipe = new ShapelessRecipe(shapeless.result);
             for (Material m : shapeless.ingredients){
                 shapelessRecipe.addIngredient(m);

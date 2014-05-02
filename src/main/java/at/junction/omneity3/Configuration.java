@@ -38,19 +38,43 @@ public class Configuration {
     }
 
     public class Recipes {
-        public Map<String, Furnace> FURNACES;
-        public Map<String, Shaped> SHAPED;
-        public Map<String, Shapeless> SHAPELESS;
+        public List<Furnace> FURNACES;
+        public List<Shaped> SHAPED;
+        public List<Shapeless> SHAPELESS;
 
         public void load() {
-
-            FURNACES = (Map)plugin.getConfig().getConfigurationSection("recipes.furnace").getValues(false);
+            FURNACES = new ArrayList<>();
+            SHAPED = new ArrayList<>();
+            SHAPELESS = new ArrayList<>();
+            Map<String, Object> temp;
+            temp = plugin.getConfig().getConfigurationSection("recipes.furnace").getValues(true);
+            for (Object o: temp.values()){
+                if (o instanceof Furnace){
+                    FURNACES.add((Furnace)o);
+                } else {
+                    System.out.println("Object not instanceof Furnace");
+                }
+            }
             plugin.getLogger().info(String.format("%s FURNACES recipes loaded", FURNACES.size()));
 
-            SHAPED = (Map)plugin.getConfig().getConfigurationSection("recipes.shaped").getValues(true);
+            temp = plugin.getConfig().getConfigurationSection("recipes.shaped").getValues(true);
+            for (Object o : temp.values()){
+                if (o instanceof Shaped){
+                    SHAPED.add((Shaped)o);
+                } else {
+                    System.out.println("Object not instanceof Shaped");
+                }
+            }
             plugin.getLogger().info(String.format("%s SHAPED recipes loaded", SHAPED.size()));
 
-            SHAPELESS = (Map)plugin.getConfig().getConfigurationSection("recipes.shapeless").getValues(true);
+            temp = plugin.getConfig().getConfigurationSection("recipes.shapeless").getValues(true);
+            for (Object o : temp.values()){
+                if (o instanceof Shapeless){
+                    SHAPELESS.add((Shapeless) o);
+                } else {
+                    System.out.println("Object not instanceof Shapeless");
+                }
+            }
             plugin.getLogger().info(String.format("%s SHAPELESS recipes loaded", SHAPELESS.size()));
         }
     }
