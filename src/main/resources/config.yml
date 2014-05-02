@@ -22,7 +22,7 @@ pet-kill-disabled: true
 recipes:
   furnace:
     mossy-cobblestone:
-      ==: at.juncton.omneity3.recipes.Furnace
+      ==: at.junction.omneity3.recipes.Furnace
       result: STONE
       source: MOSSY_COBBLESTONE
   shaped:
