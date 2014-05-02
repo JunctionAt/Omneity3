@@ -13,6 +13,7 @@ public class Furnace implements ConfigurationSerializable {
     public Furnace(Map<String, Object> map){
         source = Material.valueOf((String)map.get("source"));
         result = Material.valueOf((String)map.get("result"));
+        System.out.println(source);
     }
 
     @Override
