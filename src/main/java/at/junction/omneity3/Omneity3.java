@@ -235,6 +235,7 @@ public class Omneity3 extends JavaPlugin  {
     }
 
     public void loadRecipes() {
+        System.out.println(String.format("%s %s %s", config.recipes.FURNACES.size(), config.recipes.SHAPED.size(), config.recipes.SHAPELESS.size()));
         for (Furnace furnace : config.recipes.FURNACES.values()){
             FurnaceRecipe furnaceRecipe = new FurnaceRecipe(new ItemStack(furnace.result), furnace.source);
             getServer().addRecipe(furnaceRecipe);
