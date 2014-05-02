@@ -70,9 +70,8 @@ public class Omneity3 extends JavaPlugin  {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String name, String[] args) {
-        switch (command.getName()) {
+        switch (command.getName().toLowerCase()) {
             case "spawn":
-            case "SPAWN":
                 if (sender instanceof Player) {
                     ((Player) sender).teleport(config.spawn.LOCATION);
                     sender.sendMessage(ChatColor.RED + "Wooosh!");
@@ -86,7 +85,6 @@ public class Omneity3 extends JavaPlugin  {
                 sender.sendMessage(String.format("%sDone.", ChatColor.RED));
                 break;
             case "world":
-            case "WORLD":
                 if (args.length == 0) return false;
                 if (!(args.length == 4 || args.length == 1)) return false;
                 if (!(sender instanceof Player)) {
@@ -106,7 +104,6 @@ public class Omneity3 extends JavaPlugin  {
                 }
                 break;
             case "coords":
-            case "COORDS":
                 if (sender instanceof Player) {
                     Location loc = ((Player) sender).getLocation();
                     sender.sendMessage(String.format("%sx: %d %sy: %d %sz: %d", ChatColor.RED, loc.getBlockX(), ChatColor.BLUE, loc.getBlockY(), ChatColor.AQUA, loc.getBlockZ()));
@@ -115,7 +112,6 @@ public class Omneity3 extends JavaPlugin  {
                 }
                 break;
             case "item":
-            case "ITEM":
                 if (sender instanceof Player) {
                     Player player = (Player) sender;
                     if (args.length < 1 || args.length > 2)
@@ -142,16 +138,12 @@ public class Omneity3 extends JavaPlugin  {
                 }
                 break;
             case "staffchest":
-            case "STAFFCHEST":
                 getServer().dispatchCommand(sender, "cmodify g:base_assistance");
                 break;
             case "unstaff":
-            case "UNSTAFF":
                 getServer().dispatchCommand(sender, "cmodify -g:base_assistance");
                 break;
-
             case "trace":
-            case "TRACE":
                 if (args.length < 1 || args.length > 2) {
                     return false;
                 } else if (args.length == 1) {
@@ -161,7 +153,6 @@ public class Omneity3 extends JavaPlugin  {
                 }
                 break;
             case "tppos":
-            case "TPPOS":
                 if (args.length == 4) {
                     getServer().dispatchCommand(sender, String.format("world %s %s %s %s", args[0], args[1], args[2], args[3]));
                 } else if (args.length == 3) {
@@ -171,7 +162,6 @@ public class Omneity3 extends JavaPlugin  {
                 }
                 break;
             case "entity-magnet":
-
                 if (args.length != 2) {
                     return false;
                 } else {
