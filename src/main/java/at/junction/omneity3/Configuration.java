@@ -44,7 +44,7 @@ public class Configuration {
 
         public void load() {
 
-            FURNACES = (Map)plugin.getConfig().getConfigurationSection("recipes.furnace").getValues(true);
+            FURNACES = (Map)plugin.getConfig().getConfigurationSection("recipes.furnace").getValues(false);
             plugin.getLogger().info(String.format("%s FURNACES recipes loaded", FURNACES.size()));
 
             SHAPED = (Map)plugin.getConfig().getConfigurationSection("recipes.shaped").getValues(true);
