@@ -43,8 +43,11 @@ public class Configuration {
         public Map<String, Shapeless> SHAPELESS;
 
         public void load() {
+            plugin.getLogger().info("Loading FURNACES");
             FURNACES = (Map)plugin.getConfig().getConfigurationSection("recipes.furnace").getValues(true);
+            plugin.getLogger().info("Loading SHAPED");
             SHAPED = (Map)plugin.getConfig().getConfigurationSection("recipes.shaped").getValues(true);
+            plugin.getLogger().info("Loading SHAPELESS");
             SHAPELESS = (Map)plugin.getConfig().getConfigurationSection("recipes.shapeless").getValues(true);
 
         }

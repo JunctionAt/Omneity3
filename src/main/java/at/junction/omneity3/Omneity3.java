@@ -1,9 +1,7 @@
 package at.junction.omneity3;
 
 import at.junction.omneity3.listeners.*;
-import at.junction.omneity3.recipes.Furnace;
-import at.junction.omneity3.recipes.Shaped;
-import at.junction.omneity3.recipes.Shapeless;
+import at.junction.omneity3.recipes.*;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,14 +17,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.logging.Level;
 
 public class Omneity3 extends JavaPlugin  {
     public Configuration config;
@@ -40,6 +36,7 @@ public class Omneity3 extends JavaPlugin  {
             saveConfig();
         }
 
+        getLogger().log(Level.INFO, "Registering Deserialization Classes");
         ConfigurationSerialization.registerClass(WarpZone.class);
         ConfigurationSerialization.registerClass(Furnace.class);
         ConfigurationSerialization.registerClass(Shaped.class);
