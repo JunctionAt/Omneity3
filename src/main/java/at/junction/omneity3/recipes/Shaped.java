@@ -15,7 +15,7 @@ public class Shaped implements ConfigurationSerializable {
 
 
     public Shaped(Map<String, Object> map){
-        shape = ((String)map.get(shape)).split("|");
+        shape = ((String)map.get("shape")).split("|");
         List<String> ingredients = ((List<String>)map.get("ingredients"));
 
         ingredientMap = new HashMap<>();
