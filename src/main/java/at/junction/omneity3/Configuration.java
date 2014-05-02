@@ -71,8 +71,7 @@ public class Configuration {
 
         public void load() {
             WARP_ZONES = new HashMap<>();
-
-            WARP_ZONES = (Map)plugin.getConfig().getConfigurationSection("warpzones").getValues(true);
+            //WARP_ZONES = (Map)plugin.getConfig().getConfigurationSection("warpzones").getValues(true);
 
         }
     }
