@@ -1,5 +1,8 @@
 package at.junction.omneity3;
 
+import at.junction.omneity3.recipes.Furnace;
+import at.junction.omneity3.recipes.Shaped;
+import at.junction.omneity3.recipes.Shapeless;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -35,14 +38,15 @@ public class Configuration {
     }
 
     public class Recipes {
+        public Map<String, Furnace> FURNACES;
+        public Map<String, Shaped> SHAPED;
+        public Map<String, Shapeless> SHAPELESS;
+
         public void load() {
-            //Realistically, this should be reading from YAML
-            //I think YAML is retarded
-            //It needs to go die in a fire
-            //Bukkit's YAML lib cannot deal with paths through yaml that contain an array
-            //As that is something this requires to work
-            //I said fuck it, and wrote this comment instead.
-            //Then hard-coded recipes in Omneity3
+            FURNACES = (Map)plugin.getConfig().getConfigurationSection("recipes.furnace").getValues(true);
+            SHAPED = (Map)plugin.getConfig().getConfigurationSection("recipes.shaped").getValues(true);
+            SHAPELESS = (Map)plugin.getConfig().getConfigurationSection("recipes.shapeless").getValues(true);
+
         }
     }
 
@@ -109,6 +113,7 @@ public class Configuration {
         }
     }
 
+
     public Spawn spawn;
     public Recipes recipes;
     public Portals portals;
@@ -142,6 +147,7 @@ public class Configuration {
     public void reload() {
         plugin.reloadConfig();
         spawn.load();
+        recipes.load();
         portals.load();
         warpZones.load();
         firstJoin.load();

@@ -1,17 +1,23 @@
 package at.junction.omneity3;
 
 import at.junction.omneity3.listeners.*;
+import at.junction.omneity3.recipes.Furnace;
+import at.junction.omneity3.recipes.Shaped;
+import at.junction.omneity3.recipes.Shapeless;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
@@ -20,6 +26,7 @@ import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Omneity3 extends JavaPlugin  {
     public Configuration config;
@@ -33,8 +40,15 @@ public class Omneity3 extends JavaPlugin  {
             saveConfig();
         }
 
+        ConfigurationSerialization.registerClass(WarpZone.class);
+        ConfigurationSerialization.registerClass(Furnace.class);
+        ConfigurationSerialization.registerClass(Shaped.class);
+        ConfigurationSerialization.registerClass(Shapeless.class);
+
+
         config = new Configuration(this);
         config.load();
+
         getServer().getPluginManager().registerEvents(new Omneity3Listener(this), this);
         getServer().getPluginManager().registerEvents(new PortalListener(this), this);
         getServer().getPluginManager().registerEvents(new FirstJoinListener(this), this);
@@ -224,28 +238,26 @@ public class Omneity3 extends JavaPlugin  {
     }
 
     public void loadRecipes() {
-        String[] bardingLayout = {"  A", "ASA", "AAA"};
+        for (Furnace furnace : config.recipes.FURNACES.values()){
+            FurnaceRecipe furnaceRecipe = new FurnaceRecipe(new ItemStack(furnace.result), furnace.source);
+            getServer().addRecipe(furnaceRecipe);
+        }
+        for (Shaped shaped : config.recipes.SHAPED.values()){
+            ShapedRecipe shapedRecipe = new ShapedRecipe(shaped.result);
+            shapedRecipe.shape(shaped.shape);
+            for (Character key : shaped.ingredientMap.keySet()){
+                shapedRecipe.setIngredient(key, shaped.ingredientMap.get(key));
+            }
+            getServer().addRecipe(shapedRecipe);
+        }
 
-        //diamondBarding
-        ShapedRecipe diamondBarding = new ShapedRecipe(new ItemStack(Material.DIAMOND_BARDING));
-        diamondBarding.shape(bardingLayout);
-        diamondBarding.setIngredient('A', Material.DIAMOND);
-        diamondBarding.setIngredient('S', Material.SADDLE);
-        getServer().addRecipe(diamondBarding);
-
-        //goldBarding
-        ShapedRecipe goldBarding = new ShapedRecipe(new ItemStack(Material.GOLD_BARDING));
-        goldBarding.shape(bardingLayout);
-        goldBarding.setIngredient('A', Material.GOLD_INGOT);
-        goldBarding.setIngredient('S', Material.SADDLE);
-        getServer().addRecipe(goldBarding);
-
-        //ironBarding
-        ShapedRecipe ironBarding = new ShapedRecipe(new ItemStack(Material.IRON_BARDING));
-        ironBarding.shape(bardingLayout);
-        ironBarding.setIngredient('A', Material.IRON_INGOT);
-        ironBarding.setIngredient('S', Material.SADDLE);
-        getServer().addRecipe(ironBarding);
+        for (Shapeless shapeless : config.recipes.SHAPELESS.values()){
+            ShapelessRecipe shapelessRecipe = new ShapelessRecipe(shapeless.result);
+            for (Material m : shapeless.ingredients){
+                shapelessRecipe.addIngredient(m);
+            }
+            getServer().addRecipe(shapelessRecipe);
+        }
     }
 }
 

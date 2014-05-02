@@ -49,11 +49,11 @@ public class WarpZone implements ConfigurationSerializable {
         return map;
     }
 
-    public WarpZone valueOf(Map<String, Object> map){
+    public static WarpZone valueOf(Map<String, Object> map){
         return new WarpZone(map);
     }
 
-    public WarpZone deserialize(Map<String, Object> map){
+    public static WarpZone deserialize(Map<String, Object> map){
         return new WarpZone(map);
     }
 

@@ -20,4 +20,40 @@ firstjoin:
 swap-server: chaos
 pet-kill-disabled: true
 recipes:
-  #
+  furnace:
+    mossy-cobblestone:
+      ==: at.juncton.omneity3.recipes.Furnace
+      result: STONE
+      source: MOSSY_COBBLESTONE
+  shaped:
+    diamond-barding:
+      ==: at.junction.omneity3.recipes.Shaped
+      shape: "  A-ASA-AAA"
+      ingredients:
+      - A|DIAMOND
+      - S|SADDLE
+      result: DIAMOND_BARDING
+      count: 1
+    gold-barding:
+      ==: at.junction.omneity3.recipes.Shaped
+      shape: "  A-ASA-AAA"
+      ingredients:
+      - A|GOLD_INGOT
+      - S|SADDLE
+      result: GOLD_BARDING
+      count: 1
+    iron-barding:
+      ==: at.junction.omneity3.recipes.Shaped
+      shape: "  A-ASA-AAA"
+      ingredients:
+      - A|IRON_INGOT
+      - S|SADDLE
+      result: IRON_BARDING
+      count: 1
+  shapeless:
+    mossy-cobblestone:
+      ==: at.junction.omneity3.recipes.Shapeless
+      ingredients:
+      - VINE
+      - COBBLESTONE
+      result: MOSSY_COBBLESTONE
