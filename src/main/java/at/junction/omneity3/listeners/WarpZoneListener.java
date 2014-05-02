@@ -21,9 +21,9 @@ public class WarpZoneListener implements Listener {
 
         Block to = event.getTo().getBlock();
 
-        for (WarpZone wz : plugin.config.warpZones.warpZones) {
-            if (wz.from.contains(to)) {
-                event.getPlayer().teleport(wz.to);
+        for (WarpZone wz : plugin.config.warpZones.WARP_ZONES.values()) {
+            if (wz.getFrom().contains(to)) {
+                event.getPlayer().teleport(wz.getTo());
             }
         }
 
