@@ -5,7 +5,7 @@ portals:
   enabled: true
   require-modreq: true
   disable-destination-build: true
-warpzones:
+warpzones: []
   #spawnZone:
   #  ==: at.junction.omneity3.WarpZone
   #  minFrom: world|0|64|0
@@ -19,3 +19,5 @@ firstjoin:
   - 32xBREAD
 swap-server: chaos
 pet-kill-disabled: true
+recipes:
+  #
