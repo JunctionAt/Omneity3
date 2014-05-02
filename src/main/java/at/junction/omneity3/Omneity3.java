@@ -36,12 +36,12 @@ public class Omneity3 extends JavaPlugin  {
             saveConfig();
         }
 
-        getLogger().log(Level.INFO, "Registering Deserialization Classes");
+        getLogger().info("Registering Deserialization Classes");
         ConfigurationSerialization.registerClass(WarpZone.class);
         ConfigurationSerialization.registerClass(Furnace.class);
         ConfigurationSerialization.registerClass(Shaped.class);
         ConfigurationSerialization.registerClass(Shapeless.class);
-
+        getLogger().info("Done Registering Deserialization Classes");
 
         config = new Configuration(this);
         config.load();
