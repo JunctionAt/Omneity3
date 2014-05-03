@@ -36,6 +36,7 @@ public class Omneity3 extends JavaPlugin {
     public DataOutputStream bungeePluginChannel;
     public List<ChatColor> colors;
     public Random rand;
+
     @Override
     public void onEnable() {
 
@@ -53,7 +54,6 @@ public class Omneity3 extends JavaPlugin {
         colors.add(ChatColor.GRAY);
         colors.add(ChatColor.GREEN);
         colors.add(ChatColor.LIGHT_PURPLE);
-        colors.add(ChatColor.MAGIC);
         colors.add(ChatColor.RED);
         colors.add(ChatColor.WHITE);
         colors.add(ChatColor.YELLOW);
@@ -274,7 +274,7 @@ public class Omneity3 extends JavaPlugin {
                 }
                 break;
             case "thor":
-                if (args.length == 1){
+                if (args.length == 1) {
                     Player player = getServer().getPlayer(args[0]);
                     if (player == null) return false;
 
@@ -290,16 +290,16 @@ public class Omneity3 extends JavaPlugin {
                 break;
             case "lsd":
                 StringBuilder lsd = new StringBuilder();
-
-                for (int i=0; i<40; i++){
-                    lsd.append(colors.get(rand.nextInt(colors.size())));
-                    lsd.append('x');
-                }
-                for (int i=0; i<8; i++){
+                lsd.append(ChatColor.MAGIC);
+                for (int j = 0; j < 8; j++) {
+                    for (int i = 0; i < 40; i++) {
+                        lsd.append(colors.get(rand.nextInt(colors.size())));
+                        lsd.append('x');
+                    }
                     sender.sendMessage(String.format("%s%s", ChatColor.MAGIC, lsd.toString()));
                 }
 
-                if (sender instanceof Player){
+                if (sender instanceof Player) {
                     Player player = (Player) sender;
                     player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 600, 1));
                 }
