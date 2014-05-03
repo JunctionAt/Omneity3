@@ -1,6 +1,7 @@
 spawn:
   location: "world,0,21,0,180.0,2.0"
   bedSpawn: true
+  alawys-tp-spawn: false
 portals:
   enabled: true
   require-modreq: true

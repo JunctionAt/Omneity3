@@ -19,7 +19,7 @@ public class SpawnListener implements Listener {
     @EventHandler
     void onPlayerJoinEvent(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (!player.hasPlayedBefore()) {
+        if (!player.hasPlayedBefore() || plugin.config.spawn.ALWAYS_TP_SPAWN) {
             player.teleport(plugin.config.spawn.LOCATION);
         }
     }

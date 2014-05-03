@@ -19,6 +19,7 @@ public class Configuration {
     public class Spawn {
         public Location LOCATION;
         public boolean BED_SPAWN_ENABLED;
+        public boolean ALWAYS_TP_SPAWN;
 
         public void load() {
             ConfigurationSection config = plugin.getConfig().getConfigurationSection("spawn");
@@ -33,7 +34,7 @@ public class Configuration {
             );
 
             BED_SPAWN_ENABLED = config.getBoolean("bedSpawn");
-
+            ALWAYS_TP_SPAWN = config.getBoolean("always-tp-spawn");
         }
     }
 
