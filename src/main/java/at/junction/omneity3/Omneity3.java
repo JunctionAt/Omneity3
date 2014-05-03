@@ -247,6 +247,21 @@ public class Omneity3 extends JavaPlugin {
                     }
                 }
                 break;
+            case "thor":
+                if (args.length == 1){
+                    Player player = getServer().getPlayer(args[0]);
+                    if (player == null) return false;
+
+                    player.getWorld().strikeLightning(player.getLocation());
+                    player.setHealth(0);
+                    sender.sendMessage(String.format("%sThou hast smote the evil player %s with thy mighty hand.", ChatColor.LIGHT_PURPLE, player.getDisplayName()));
+                    player.sendMessage(String.format("%sYou have been smote by Thor's Hammer!", ChatColor.RED));
+                    getServer().dispatchCommand(sender, String.format("transmission:staffchat I have smitten %s", player.getDisplayName()));
+
+                } else {
+                    return false;
+                }
+                break;
         }
         return true;
     }

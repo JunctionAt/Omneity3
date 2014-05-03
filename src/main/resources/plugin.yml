@@ -57,6 +57,10 @@ commands:
     description: Give a player a pet
     permission: omneity.pet
     usage: /give-pet new-owner
+  thor:
+    description: Murder a player with lightening
+    permission: omneity.thor
+    usage: /thor <player>
 permissions:
   omneity.spawn:
     description: Usage of /spawn command
@@ -81,4 +85,7 @@ permissions:
     default: op
   omneity.give-pet:
     description: Give players pets!
+    default: op
+  omneity.thor:
+    description: /thor
     default: op
