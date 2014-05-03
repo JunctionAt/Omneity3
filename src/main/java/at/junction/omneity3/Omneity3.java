@@ -289,7 +289,7 @@ public class Omneity3 extends JavaPlugin {
                 }
                 break;
             case "lsd":
-                for (int j = 0; j < 8; j++) {
+                for (int j = 0; j < 10; j++) {
                     StringBuilder lsd = new StringBuilder();
                     for (int i = 0; i < 40; i++) {
 
