@@ -16,6 +16,7 @@ import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.ByteArrayOutputStream;
@@ -24,10 +25,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-public class Omneity3 extends JavaPlugin  {
+public class Omneity3 extends JavaPlugin {
     public Configuration config;
     ArrayList<EntityType> blockedEntities;
     public DataOutputStream bungeePluginChannel;
+
     @Override
     public void onEnable() {
         File cfile = new File(getDataFolder(), "config.yml");
@@ -74,7 +76,7 @@ public class Omneity3 extends JavaPlugin  {
     public void onDisable() {
         try {
             bungeePluginChannel.close();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -215,7 +217,7 @@ public class Omneity3 extends JavaPlugin  {
                 }
                 break;
             case "swap-player":
-                if (args.length != 2){
+                if (args.length != 2) {
                     return false;
                 }
                 Player p = getServer().getPlayer(args[0]);
@@ -226,8 +228,23 @@ public class Omneity3 extends JavaPlugin  {
                     out.writeUTF("Connect");
                     out.writeUTF(config.bungeeSwap.SERVER);
                     p.sendPluginMessage(this, "BungeeCord", b.toByteArray());
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
+                }
+                break;
+            case "give-pet":
+                if (sender instanceof Player) {
+                    Player player = (Player) sender;
+                    if (args.length == 1) {
+                        if (getServer().getPlayer(args[0]) != null) {
+                            player.setMetadata("give-pet", new FixedMetadataValue(this, args[0]));
+                            player.sendMessage("Right click the pet you want to give away. This cannot be undone");
+                        } else {
+                            player.sendMessage("This player is not online");
+                        }
+                    } else {
+                        return false;
+                    }
                 }
                 break;
         }
@@ -236,22 +253,22 @@ public class Omneity3 extends JavaPlugin  {
 
     public void loadRecipes() {
         System.out.println(String.format("%s %s %s", config.recipes.FURNACES.size(), config.recipes.SHAPED.size(), config.recipes.SHAPELESS.size()));
-        for (Furnace furnace : config.recipes.FURNACES){
+        for (Furnace furnace : config.recipes.FURNACES) {
             FurnaceRecipe furnaceRecipe = new FurnaceRecipe(new ItemStack(furnace.result), furnace.source);
             getServer().addRecipe(furnaceRecipe);
         }
-        for (Shaped shaped : config.recipes.SHAPED){
+        for (Shaped shaped : config.recipes.SHAPED) {
             ShapedRecipe shapedRecipe = new ShapedRecipe(shaped.result);
             shapedRecipe.shape(shaped.shape);
-            for (Character key : shaped.ingredientMap.keySet()){
+            for (Character key : shaped.ingredientMap.keySet()) {
                 shapedRecipe.setIngredient(key, shaped.ingredientMap.get(key));
             }
             getServer().addRecipe(shapedRecipe);
         }
 
-        for (Shapeless shapeless : config.recipes.SHAPELESS){
+        for (Shapeless shapeless : config.recipes.SHAPELESS) {
             ShapelessRecipe shapelessRecipe = new ShapelessRecipe(shapeless.result);
-            for (Material m : shapeless.ingredients){
+            for (Material m : shapeless.ingredients) {
                 shapelessRecipe.addIngredient(m);
             }
             getServer().addRecipe(shapelessRecipe);

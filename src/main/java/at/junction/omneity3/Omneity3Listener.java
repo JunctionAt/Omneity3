@@ -1,16 +1,10 @@
 package at.junction.omneity3;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Chunk;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Sign;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -78,6 +72,28 @@ public class Omneity3Listener implements Listener {
         }
     }
 
+
+    @EventHandler
+    void onPlayerInteractEntityEvent(PlayerInteractEntityEvent event){
+        if (event.getPlayer().hasMetadata("give-pet")){
+            if (event.getRightClicked() instanceof Tameable){
+                Tameable pet = (Tameable) event.getRightClicked();
+                if (pet.isTamed() && pet.getOwner() instanceof Player){
+                    Player player = (Player)pet.getOwner();
+                    if (player.equals(event.getPlayer())){
+                        OfflinePlayer reciever = plugin.getServer().getOfflinePlayer((String)event.getPlayer().getMetadata("give-pet").get(0).value());
+                        pet.setOwner(reciever);
+                    } else {
+                        event.getPlayer().sendMessage("This pet is not yours to give");
+                    }
+                } else {
+                    event.getPlayer().sendMessage("This pet is not tamed");
+                }
+            } else {
+                event.getPlayer().sendMessage("That entity can not be a pet");
+            }
+        }
+    }
 
 }
 

@@ -53,6 +53,10 @@ commands:
     description: Swap player to server
     permission: omneity.swap
     usage: /swap-player player server
+  give-pet:
+    description: Give a player a pet
+    permission: omneity.pet
+    usage: /give-pet new-owner
 permissions:
   omneity.spawn:
     description: Usage of /spawn command
@@ -74,4 +78,7 @@ permissions:
     default: op
   omneity.swap:
     description: /swap-player usage
+    default: op
+  omneity.give-pet:
+    description: Give players pets!
     default: op
