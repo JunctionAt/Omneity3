@@ -100,15 +100,6 @@ public class Configuration {
         }
     }
 
-    public class BungeeSwap {
-
-        public String SERVER;
-
-        public void load(){
-            SERVER = plugin.getConfig().getString("swap-server");
-        }
-    }
-
     public class PetKill {
         public boolean DISABLED;
 
@@ -123,7 +114,6 @@ public class Configuration {
     public Portals portals;
     public WarpZones warpZones;
     public FirstJoin firstJoin;
-    public BungeeSwap bungeeSwap;
     public PetKill petKill;
 
 
@@ -134,7 +124,6 @@ public class Configuration {
         portals = new Portals();
         warpZones = new WarpZones();
         firstJoin = new FirstJoin();
-        bungeeSwap = new BungeeSwap();
         petKill = new PetKill();
     }
 
@@ -144,7 +133,6 @@ public class Configuration {
         portals.load();
         warpZones.load();
         firstJoin.load();
-        bungeeSwap.load();
         petKill.load();
     }
 

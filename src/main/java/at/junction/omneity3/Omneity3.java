@@ -226,7 +226,7 @@ public class Omneity3 extends JavaPlugin {
                 DataOutputStream out = new DataOutputStream(b);
                 try {
                     out.writeUTF("Connect");
-                    out.writeUTF(config.bungeeSwap.SERVER);
+                    out.writeUTF(args[1]);
                     p.sendPluginMessage(this, "BungeeCord", b.toByteArray());
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -18,7 +18,6 @@ firstjoin:
   itemsEnabled: false
   items:
   - 32xBREAD
-swap-server: chaos
 pet-kill-disabled: true
 recipes:
   furnace:
