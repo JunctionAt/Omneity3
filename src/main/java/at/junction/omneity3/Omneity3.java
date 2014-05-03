@@ -38,13 +38,25 @@ public class Omneity3 extends JavaPlugin {
     public Random rand;
     @Override
     public void onEnable() {
-        colors = Arrays.asList(ChatColor.values());
-        colors.remove(ChatColor.BOLD);
-        colors.remove(ChatColor.ITALIC);
-        colors.remove(ChatColor.MAGIC);
-        colors.remove(ChatColor.RESET);
-        colors.remove(ChatColor.STRIKETHROUGH);
-        colors.remove(ChatColor.UNDERLINE);
+
+        colors = new ArrayList<>();
+        colors.add(ChatColor.AQUA);
+        colors.add(ChatColor.BLACK);
+        colors.add(ChatColor.BLUE);
+        colors.add(ChatColor.DARK_AQUA);
+        colors.add(ChatColor.DARK_BLUE);
+        colors.add(ChatColor.DARK_GRAY);
+        colors.add(ChatColor.DARK_GREEN);
+        colors.add(ChatColor.DARK_PURPLE);
+        colors.add(ChatColor.DARK_RED);
+        colors.add(ChatColor.GOLD);
+        colors.add(ChatColor.GRAY);
+        colors.add(ChatColor.GREEN);
+        colors.add(ChatColor.LIGHT_PURPLE);
+        colors.add(ChatColor.MAGIC);
+        colors.add(ChatColor.RED);
+        colors.add(ChatColor.WHITE);
+        colors.add(ChatColor.YELLOW);
         rand = new Random();
         File cfile = new File(getDataFolder(), "config.yml");
         if (!cfile.exists()) {
