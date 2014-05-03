@@ -18,20 +18,34 @@ import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 
 public class Omneity3 extends JavaPlugin {
     public Configuration config;
     ArrayList<EntityType> blockedEntities;
     public DataOutputStream bungeePluginChannel;
-
+    public List<ChatColor> colors;
+    public Random rand;
     @Override
     public void onEnable() {
+        colors = Arrays.asList(ChatColor.values());
+        colors.remove(ChatColor.BOLD);
+        colors.remove(ChatColor.ITALIC);
+        colors.remove(ChatColor.MAGIC);
+        colors.remove(ChatColor.RESET);
+        colors.remove(ChatColor.STRIKETHROUGH);
+        colors.remove(ChatColor.UNDERLINE);
+        rand = new Random();
         File cfile = new File(getDataFolder(), "config.yml");
         if (!cfile.exists()) {
             getConfig().options().copyDefaults(true);
@@ -261,6 +275,24 @@ public class Omneity3 extends JavaPlugin {
                 } else {
                     return false;
                 }
+                break;
+            case "lsd":
+                StringBuilder lsd = new StringBuilder();
+                lsd.append(ChatColor.MAGIC);
+
+                for (int i=0; i<40; i++){
+                    lsd.append(colors.get(rand.nextInt(colors.size())));
+                    lsd.append('x');
+                }
+                for (int i=0; i<8; i++){
+                    sender.sendMessage(lsd.toString());
+                }
+
+                if (sender instanceof Player){
+                    Player player = (Player) sender;
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 600, 1));
+                }
+
                 break;
         }
         return true;

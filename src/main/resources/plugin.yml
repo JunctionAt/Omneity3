@@ -61,6 +61,10 @@ commands:
     description: Murder a player with lightening
     permission: omneity.thor
     usage: /thor <player>
+  lsd:
+    description: Do some drugs
+    permission: omneity.lsd
+    usage: /lsd
 permissions:
   omneity.spawn:
     description: Usage of /spawn command
@@ -89,3 +93,6 @@ permissions:
   omneity.thor:
     description: /thor
     default: op
+  omneity.lsd:
+    description: /lsd
+    default: true
