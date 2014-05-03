@@ -290,14 +290,13 @@ public class Omneity3 extends JavaPlugin {
                 break;
             case "lsd":
                 StringBuilder lsd = new StringBuilder();
-                lsd.append(ChatColor.MAGIC);
 
                 for (int i=0; i<40; i++){
                     lsd.append(colors.get(rand.nextInt(colors.size())));
                     lsd.append('x');
                 }
                 for (int i=0; i<8; i++){
-                    sender.sendMessage(lsd.toString());
+                    sender.sendMessage(String.format("%s%s", ChatColor.MAGIC, lsd.toString()));
                 }
 
                 if (sender instanceof Player){
