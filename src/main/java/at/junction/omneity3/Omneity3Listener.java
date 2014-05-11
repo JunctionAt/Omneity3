@@ -66,8 +66,12 @@ public class Omneity3Listener implements Listener {
                         (monster.getType() == EntityType.SKELETON && monster.getEquipment().getItemInHand().getType() != Material.BOW)) {
                     remove = false;
                 }
-                if (remove)
+                if (remove){
+                    if (monster.getVehicle() instanceof Chicken){
+                        monster.getVehicle().remove();
+                    }
                     monster.remove();
+                }
             }
         }
     }
