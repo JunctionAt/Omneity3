@@ -1,23 +1,25 @@
 package at.junction.omneity3.recipes;
 
+import at.junction.omneity3.Omneity3;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Shapeless implements ConfigurationSerializable {
-    public List<Material> ingredients;
+    public List<MaterialData> ingredients;
     public ItemStack result;
     public Shapeless(Map<String, Object> map){
         List<String> temp = ((List<String>)map.get("ingredients"));
         ingredients = new ArrayList<>();
         for (String t : temp){
-            ingredients.add(Material.valueOf(t));
+            ingredients.add(Omneity3.toMat(t));
         }
-        result = new ItemStack(Material.valueOf((String)map.get("result")), (int)map.get("count"));
+        result = Omneity3.toMat((String)map.get("result")).toItemStack((int)map.get("count"));
     }
 
 
