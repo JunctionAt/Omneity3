@@ -8,6 +8,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.event.world.PortalCreateEvent;
@@ -98,6 +99,15 @@ public class Omneity3Listener implements Listener {
             }
         }
     }
+
+//    @EventHandler
+//    void onEntityDeathEvent(EntityDeathEvent event){
+//        if (event.getEntity().getKiller() != null && event.getEntity().getKiller().getName().equalsIgnoreCase("adamminer")){
+//            event.getDrops().clear();
+//            event.getDrops().add(new ItemStack(Material.STRING));
+//            event.getDrops().add(new ItemStack(Material.STICK));
+//        }
+//    }
 
 }
 
