@@ -1,18 +1,20 @@
 package at.junction.omneity3.recipes;
 
+import at.junction.omneity3.Omneity3;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.material.MaterialData;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Furnace implements ConfigurationSerializable {
-    public Material source;
-    public Material result;
+    public MaterialData source;
+    public MaterialData result;
 
     public Furnace(Map<String, Object> map){
-        source = Material.valueOf((String)map.get("source"));
-        result = Material.valueOf((String)map.get("result"));
+        source = Omneity3.toMat((String) map.get("source"));
+        result = Omneity3.toMat((String)map.get("result"));
         System.out.println(source);
     }
 

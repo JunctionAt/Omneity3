@@ -16,6 +16,7 @@ import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
+import org.bukkit.material.MaterialData;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -313,7 +314,7 @@ public class Omneity3 extends JavaPlugin {
     public void loadRecipes() {
         System.out.println(String.format("%s %s %s", config.recipes.FURNACES.size(), config.recipes.SHAPED.size(), config.recipes.SHAPELESS.size()));
         for (Furnace furnace : config.recipes.FURNACES) {
-            FurnaceRecipe furnaceRecipe = new FurnaceRecipe(new ItemStack(furnace.result), furnace.source);
+            FurnaceRecipe furnaceRecipe = new FurnaceRecipe(furnace.result.toItemStack(), furnace.source);
             getServer().addRecipe(furnaceRecipe);
         }
         for (Shaped shaped : config.recipes.SHAPED) {
@@ -327,11 +328,26 @@ public class Omneity3 extends JavaPlugin {
 
         for (Shapeless shapeless : config.recipes.SHAPELESS) {
             ShapelessRecipe shapelessRecipe = new ShapelessRecipe(shapeless.result);
-            for (Material m : shapeless.ingredients) {
+            for (MaterialData m : shapeless.ingredients) {
                 shapelessRecipe.addIngredient(m);
             }
             getServer().addRecipe(shapelessRecipe);
         }
+    }
+
+    public static MaterialData toMat(String s) {
+        String[] args = s.split(":");
+
+        Material mat = Material.valueOf(args[0]);
+
+        byte data;
+        if(args.length >= 2) {
+            data = Byte.parseByte(args[0]);
+        } else {
+            data = 0;
+        }
+
+        return new MaterialData(mat, data);  // Damnit bukkit
     }
 }
 
