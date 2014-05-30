@@ -88,18 +88,18 @@ public class Omneity3Listener implements Listener {
                     if (player.equals(event.getPlayer())){
                         OfflinePlayer reciever = plugin.getServer().getOfflinePlayer((String)event.getPlayer().getMetadata("give-pet").get(0).value());
                         pet.setOwner(reciever);
-                        event.getPlayer().removeMetadata("give-pet", this);
+                        (Player)event.getPlayer().removeMetadata("give-pet", this);
                     } else {
                         event.getPlayer().sendMessage("This pet is not yours to give");
-                        event.getPlayer().removeMetadata("give-pet", this);
+                        (Player)event.getPlayer().removeMetadata("give-pet", this);
                     }
                 } else {
                     event.getPlayer().sendMessage("This pet is not tamed");
-                    event.getPlayer().removeMetadata("give-pet", this);
+                    (Player)event.getPlayer().removeMetadata("give-pet", this);
                 }
             } else {
                 event.getPlayer().sendMessage("That entity can not be a pet");
-                event.getPlayer().removeMetadata("give-pet", this);
+                (Player)event.getPlayer().removeMetadata("give-pet", this);
             }
         }
     }
