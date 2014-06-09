@@ -89,6 +89,9 @@ permissions:
     default: op
   omneity.give-pet:
     description: Give players pets!
+    default: true
+  omneity.give-pet.override:
+    description: Give players other players pets
     default: op
   omneity.thor:
     description: /thor

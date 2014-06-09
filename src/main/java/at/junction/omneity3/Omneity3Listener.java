@@ -85,7 +85,7 @@ public class Omneity3Listener implements Listener {
                 Tameable pet = (Tameable) event.getRightClicked();
                 if (pet.isTamed() && pet.getOwner() instanceof Player){
                     Player player = (Player)pet.getOwner();
-                    if (player.equals(event.getPlayer())){
+                    if (player.equals(event.getPlayer()) || event.getPlayer().hasPermission("omneity3.give-pet.override")){
                         OfflinePlayer reciever = plugin.getServer().getOfflinePlayer((String)event.getPlayer().getMetadata("give-pet").get(0).value());
                         pet.setOwner(reciever);
                         event.getPlayer().removeMetadata("give-pet", plugin);
