@@ -342,7 +342,7 @@ public class Omneity3 extends JavaPlugin {
 
         byte data;
         if(args.length >= 2) {
-            data = Byte.parseByte(args[0]);
+            data = Byte.parseByte(args[1]);
         } else {
             data = 0;
         }
